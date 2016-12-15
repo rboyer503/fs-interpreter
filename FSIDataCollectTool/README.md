@@ -43,7 +43,7 @@ Example usage
 7. Hit '1' to generate the raw data and label files for the data collected under .\data.
 8. Hit '2' to load the data.raw file.
 9. Hit '>' to navigate to the first sample; sample is displayed in the Data Collection Viewer window.
-10) When done, hit the Escape key to exit.
+10. When done, hit the Escape key to exit.
 
 Miscellaneous usage notes:
 - Timing the capture of a burst/clip of snapshots can be challenging.  To make this process easier, the software plays 4 beep sounds at regular intervals.  Immediately after the 3rd beep, we begin capturing snapshots.  All snapshots are collected by the 4th beep: (beep ... beep ... beep ... `<capture snapshots>` ... beep).  It is recommended to practice several times before attempting to collect real samples.
