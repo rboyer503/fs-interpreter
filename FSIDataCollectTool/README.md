@@ -22,17 +22,17 @@ Usage
     FSIDataCollectTool <device ID>
         <device ID>: ID of video device (0-9)
 
-Example usage:
+Example usage
 1. Start the FSI Data Collect Tool.
 2. Hold the 'A' symbol (basic closed hand facing forward with thumb on side) roughly 2 to 6 feet from webcam until software locates hand and enters the TRACK_HAND state.
-3. Begin collecting samples:
+3. Begin collecting samples.
   1. While holding the 'A' symbol, hit 'a' to capture 10 snapshots to .\TempData\a.
   2. While holding the 'B' symbol, hit 'B' to capture 20 snapshots to .\TempData\b.
   3. Hit '!' to toggle to single image capture mode.
   4. While holding the sentinel symbol, hit 'z' to capture a single snapshot to .\TempData\z.
   5. Hit '!' again to return to burst image capture mode.
 4. Move all subdirectories under .\TempData into a new subdirectory under .\data (for example, .\data\MyData).
-5. Capture samples involving motion:
+5. Capture samples involving motion.
   1. Hit '@' to toggle to J/Z capture mode.
   2. Hit 'j' and perform the 'J' gesture to capture the clip.
   3. Hit 'z' and perform the 'Z' gesture to capture another clip.
@@ -50,7 +50,8 @@ Miscellaneous usage notes:
 
 Main Menu
 ---------
-Press the desired key to trigger various actions as defined in the menu:
+Press the desired key to trigger various actions as defined in the menu.
+
     ESC:    Exit
     SPACE:  Pause
     ?:      Display this menu
