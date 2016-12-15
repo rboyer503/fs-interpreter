@@ -23,6 +23,7 @@ Usage
         <device ID>: ID of video device (0-9)
 
 Example usage
+
 1. Start the FSI Data Collect Tool.
 2. Hold the 'A' symbol (basic closed hand facing forward with thumb on side) roughly 2 to 6 feet from webcam until software locates hand and enters the TRACK_HAND state.
 3. Begin collecting samples.
