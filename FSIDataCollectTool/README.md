@@ -8,64 +8,64 @@ This utility is designed to simplify collection of data samples used for trainin
 
 Dependencies
 ------------
-OpenCV 2.4.11 (Core, HighGUI, ImgProc, and ObjDetect)
-	- Minor patch required for restoring auto-exposure - updated file included at ./OpenCVPatch/cap_dshow.cpp.
-Windows Multimedia API (WinMM.lib)
-Boost 1.55 (Only for posix_time - could be removed without much effort.)
-Visual C++ 2010 SP1 x64 runtime components
-	- For pre-built binary only (available at ./x64/Release/FSIDataCollectTool.exe).
-	- Redistributable can be found at https://www.microsoft.com/en-us/download/details.aspx?id=26999.
+- OpenCV 2.4.11 (Core, HighGUI, ImgProc, and ObjDetect)
+  - Minor patch required for restoring auto-exposure - updated file included at ./OpenCVPatch/cap_dshow.cpp.
+- Windows Multimedia API (WinMM.lib)
+- Boost 1.55 (Only for posix_time - could be removed without much effort.)
+- Visual C++ 2010 SP1 x64 runtime components
+  - For pre-built binary only (available at ./x64/Release/FSIDataCollectTool.exe).
+  - Redistributable can be found at https://www.microsoft.com/en-us/download/details.aspx?id=26999.
 
 
 Usage
 -----
-FSIDataCollectTool <device ID>
-       <device ID>: ID of video device (0-9)
+    FSIDataCollectTool <device ID>
+        <device ID>: ID of video device (0-9)
 
 Example usage:
-1) Start the FSI Data Collect Tool.
-2) Hold the 'A' symbol (basic closed hand facing forward with thumb on side) roughly 2 to 6 feet from webcam until software locates hand and enters the TRACK_HAND state.
-3) Begin collecting samples:
-	a) While holding the 'A' symbol, hit 'a' to capture 10 snapshots to .\TempData\a.
-	b) While holding the 'B' symbol, hit 'B' to capture 20 snapshots to .\TempData\b.
-	c) Hit '!' to toggle to single image capture mode.
-	d) While holding the sentinel symbol, hit 'z' to capture a single snapshot to .\TempData\z.
-	e) Hit '!' again to return to burst image capture mode.
-4) Move all subdirectories under .\TempData into a new subdirectory under .\data (for example, .\data\MyData).
-5) Capture samples involving motion:
-	a) Hit '@' to toggle to J/Z capture mode.
-	b) Hit 'j' and perform the 'J' gesture to capture the clip.
-	c) Hit 'z' and perform the 'Z' gesture to capture another clip.
-	d) Hit 'q' and do neither 'J' nor 'Z' to capture a "neither" clip.
-	e) Hit '@' to return to normal capture mode.
-6) Move all subdirectories under .\TempData into a new subdirectory under .\clipData (for example, .\clipData\MyClipData).
-7) Hit '1' to generate the raw data and label files for the data collected under .\data.
-8) Hit '2' to load the data.raw file.
-9) Hit '>' to navigate to the first sample; sample is displayed in the Data Collection Viewer window.
+1. Start the FSI Data Collect Tool.
+2. Hold the 'A' symbol (basic closed hand facing forward with thumb on side) roughly 2 to 6 feet from webcam until software locates hand and enters the TRACK_HAND state.
+3. Begin collecting samples:
+  1. While holding the 'A' symbol, hit 'a' to capture 10 snapshots to .\TempData\a.
+  2. While holding the 'B' symbol, hit 'B' to capture 20 snapshots to .\TempData\b.
+  3. Hit '!' to toggle to single image capture mode.
+  4. While holding the sentinel symbol, hit 'z' to capture a single snapshot to .\TempData\z.
+  5. Hit '!' again to return to burst image capture mode.
+4. Move all subdirectories under .\TempData into a new subdirectory under .\data (for example, .\data\MyData).
+5. Capture samples involving motion:
+  1. Hit '@' to toggle to J/Z capture mode.
+  2. Hit 'j' and perform the 'J' gesture to capture the clip.
+  3. Hit 'z' and perform the 'Z' gesture to capture another clip.
+  4. Hit 'q' and do neither 'J' nor 'Z' to capture a "neither" clip.
+  5. Hit '@' to return to normal capture mode.
+6. Move all subdirectories under .\TempData into a new subdirectory under .\clipData (for example, .\clipData\MyClipData).
+7. Hit '1' to generate the raw data and label files for the data collected under .\data.
+8. Hit '2' to load the data.raw file.
+9. Hit '>' to navigate to the first sample; sample is displayed in the Data Collection Viewer window.
 10) When done, hit the Escape key to exit.
 
 Miscellaneous usage notes:
-- Timing the capture of a burst/clip of snapshots can be challenging.  To make this process easier, the software plays 4 beep sounds at regular intervals.  Immediately after the 3rd beep, we begin capturing snapshots.  All snapshots are collected by the 4th beep: (beep ... beep ... beep ... <capture snapshots> ... beep).  It is recommended to practice several times before attempting to collect real samples.
+- Timing the capture of a burst/clip of snapshots can be challenging.  To make this process easier, the software plays 4 beep sounds at regular intervals.  Immediately after the 3rd beep, we begin capturing snapshots.  All snapshots are collected by the 4th beep: (beep ... beep ... beep ... `<capture snapshots>` ... beep).  It is recommended to practice several times before attempting to collect real samples.
 
 
 Main Menu
 ---------
 Press the desired key to trigger various actions as defined in the menu:
-        ESC:    Exit
-        SPACE:  Pause
-        ?:      Display this menu
-        !:      Toggle single image capture mode
-        @:      Toggle J/Z capture mode
-        [a..z]: Capture 10 snapshots
-        [A..Z]: Capture 20 snapshots
-        1:      Generate data and label files
-        2:      Load data file
-        3:      Split data and label files
-        4:      Calculate data file statistics
-        </>:    Move back/forward one image
-        [/]:    Move back/forward one letter
-        {/}:    Move back/forward one collection
-        +/-:    Increase/decrease camera exposure
+    ESC:    Exit
+    SPACE:  Pause
+    ?:      Display this menu
+    !:      Toggle single image capture mode
+    @:      Toggle J/Z capture mode
+    [a..z]: Capture 10 snapshots
+    [A..Z]: Capture 20 snapshots
+    1:      Generate data and label files
+    2:      Load data file
+    3:      Split data and label files
+    4:      Calculate data file statistics
+    </>:    Move back/forward one image
+    [/]:    Move back/forward one letter
+    {/}:    Move back/forward one collection
+    +/-:    Increase/decrease camera exposure
 
 
 Actions
