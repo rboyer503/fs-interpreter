@@ -1,0 +1,1640 @@
+TRAINING SESSION STARTING: 1 1
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 1
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data1.raw.gz
+Extracting labels: data/labels1.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 3.246, learning rate: 0.015000
+Minibatch error: 95.0%
+Validation error: 95.6%
+Test error: 95.1%
+Mon Dec 19 19:08:25 2016
+Epoch 0.04
+Minibatch loss: 3.251, learning rate: 0.015000
+Minibatch error: 96.0%
+Validation error: 93.8%
+Test error: 94.9%
+Mon Dec 19 19:08:28 2016
+Epoch 0.07
+Minibatch loss: 3.085, learning rate: 0.015000
+Minibatch error: 83.0%
+Validation error: 82.0%
+Test error: 83.7%
+Mon Dec 19 19:08:30 2016
+Epoch 0.11
+Minibatch loss: 2.610, learning rate: 0.015000
+Minibatch error: 80.0%
+Validation error: 67.3%
+Test error: 64.4%
+Mon Dec 19 19:08:32 2016
+Epoch 0.14
+Minibatch loss: 2.263, learning rate: 0.015000
+Minibatch error: 70.0%
+Validation error: 52.3%
+Test error: 51.2%
+Mon Dec 19 19:08:34 2016
+Epoch 0.18
+Minibatch loss: 1.880, learning rate: 0.015000
+Minibatch error: 65.0%
+Validation error: 45.8%
+Test error: 42.9%
+Mon Dec 19 19:08:36 2016
+Epoch 0.21
+Minibatch loss: 1.783, learning rate: 0.015000
+Minibatch error: 56.0%
+Validation error: 43.6%
+Test error: 39.6%
+Mon Dec 19 19:08:38 2016
+Epoch 0.25
+Minibatch loss: 1.455, learning rate: 0.015000
+Minibatch error: 51.0%
+Validation error: 38.1%
+Test error: 38.0%
+Mon Dec 19 19:08:40 2016
+Epoch 0.28
+Minibatch loss: 1.408, learning rate: 0.015000
+Minibatch error: 44.0%
+Validation error: 32.4%
+Test error: 32.1%
+Mon Dec 19 19:08:43 2016
+Epoch 0.32
+Minibatch loss: 1.443, learning rate: 0.015000
+Minibatch error: 50.0%
+Validation error: 28.8%
+Test error: 22.7%
+Mon Dec 19 19:08:45 2016
+Epoch 0.35
+Minibatch loss: 1.111, learning rate: 0.015000
+Minibatch error: 40.0%
+Validation error: 29.2%
+Test error: 26.1%
+Mon Dec 19 19:08:47 2016
+Epoch 0.39
+Minibatch loss: 1.136, learning rate: 0.015000
+Minibatch error: 39.0%
+Validation error: 28.3%
+Test error: 24.2%
+Mon Dec 19 19:08:49 2016
+Epoch 0.42
+Minibatch loss: 1.294, learning rate: 0.015000
+Minibatch error: 44.0%
+Validation error: 25.3%
+Test error: 21.2%
+Mon Dec 19 19:08:51 2016
+Epoch 0.46
+Minibatch loss: 1.013, learning rate: 0.015000
+Minibatch error: 39.0%
+Validation error: 22.1%
+Test error: 21.9%
+Mon Dec 19 19:08:53 2016
+Epoch 0.49
+Minibatch loss: 0.918, learning rate: 0.015000
+Minibatch error: 31.0%
+Validation error: 18.2%
+Test error: 16.8%
+Mon Dec 19 19:08:55 2016
+Epoch 0.53
+Minibatch loss: 0.784, learning rate: 0.015000
+Minibatch error: 29.0%
+Validation error: 20.2%
+Test error: 14.7%
+Mon Dec 19 19:08:58 2016
+Epoch 0.56
+Minibatch loss: 0.789, learning rate: 0.015000
+Minibatch error: 23.0%
+Validation error: 19.8%
+Test error: 14.7%
+Mon Dec 19 19:09:00 2016
+Epoch 0.60
+Minibatch loss: 0.865, learning rate: 0.015000
+Minibatch error: 27.0%
+Validation error: 18.2%
+Test error: 18.4%
+Mon Dec 19 19:09:02 2016
+Epoch 0.63
+Minibatch loss: 0.724, learning rate: 0.015000
+Minibatch error: 22.0%
+Validation error: 18.0%
+Test error: 12.3%
+Mon Dec 19 19:09:04 2016
+Epoch 0.67
+Minibatch loss: 0.732, learning rate: 0.015000
+Minibatch error: 22.0%
+Validation error: 15.2%
+Test error: 11.5%
+Mon Dec 19 19:09:06 2016
+Epoch 0.70
+Minibatch loss: 0.653, learning rate: 0.015000
+Minibatch error: 18.0%
+Validation error: 14.1%
+Test error: 11.9%
+Mon Dec 19 19:09:08 2016
+Epoch 0.74
+Minibatch loss: 0.656, learning rate: 0.015000
+Minibatch error: 16.0%
+Validation error: 13.3%
+Test error: 10.0%
+Mon Dec 19 19:09:10 2016
+Epoch 0.77
+Minibatch loss: 0.896, learning rate: 0.015000
+Minibatch error: 26.0%
+Validation error: 13.1%
+Test error: 9.2%
+Mon Dec 19 19:09:13 2016
+Epoch 0.81
+Minibatch loss: 0.888, learning rate: 0.015000
+Minibatch error: 28.0%
+Validation error: 13.2%
+Test error: 11.8%
+Mon Dec 19 19:09:15 2016
+Epoch 0.84
+Minibatch loss: 0.494, learning rate: 0.015000
+Minibatch error: 12.0%
+Validation error: 10.9%
+Test error: 10.1%
+Mon Dec 19 19:09:17 2016
+Epoch 0.88
+Minibatch loss: 0.625, learning rate: 0.015000
+Minibatch error: 17.0%
+Validation error: 11.4%
+Test error: 8.2%
+Mon Dec 19 19:09:19 2016
+Epoch 0.91
+Minibatch loss: 0.590, learning rate: 0.015000
+Minibatch error: 19.0%
+Validation error: 10.6%
+Test error: 10.8%
+Mon Dec 19 19:09:21 2016
+Epoch 0.95
+Minibatch loss: 0.510, learning rate: 0.015000
+Minibatch error: 19.0%
+Validation error: 10.6%
+Test error: 7.3%
+Mon Dec 19 19:09:23 2016
+Epoch 0.98
+Minibatch loss: 0.617, learning rate: 0.015000
+Minibatch error: 20.0%
+Validation error: 9.2%
+Test error: 9.0%
+Mon Dec 19 19:09:25 2016
+Final test error: 11.2%
+Best test error: 7.3%
+TRAINING SESSION STARTING: 1 2
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 2
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data2.raw.gz
+Extracting labels: data/labels2.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.596, learning rate: 0.014250
+Minibatch error: 23.0%
+Validation error: 10.8%
+Test error: 11.0%
+Mon Dec 19 19:09:37 2016
+Epoch 0.04
+Minibatch loss: 0.546, learning rate: 0.014250
+Minibatch error: 16.0%
+Validation error: 12.2%
+Test error: 10.3%
+Mon Dec 19 19:09:40 2016
+Epoch 0.07
+Minibatch loss: 0.518, learning rate: 0.014250
+Minibatch error: 15.0%
+Validation error: 8.5%
+Test error: 8.0%
+Mon Dec 19 19:09:42 2016
+Epoch 0.11
+Minibatch loss: 0.408, learning rate: 0.014250
+Minibatch error: 11.0%
+Validation error: 8.4%
+Test error: 10.1%
+Mon Dec 19 19:09:44 2016
+Epoch 0.14
+Minibatch loss: 0.600, learning rate: 0.014250
+Minibatch error: 16.0%
+Validation error: 8.5%
+Test error: 7.4%
+Mon Dec 19 19:09:46 2016
+Epoch 0.18
+Minibatch loss: 0.583, learning rate: 0.014250
+Minibatch error: 18.0%
+Validation error: 8.6%
+Test error: 7.6%
+Mon Dec 19 19:09:48 2016
+Epoch 0.21
+Minibatch loss: 0.512, learning rate: 0.014250
+Minibatch error: 14.0%
+Validation error: 10.1%
+Test error: 8.5%
+Mon Dec 19 19:09:50 2016
+Epoch 0.25
+Minibatch loss: 0.559, learning rate: 0.014250
+Minibatch error: 13.0%
+Validation error: 7.6%
+Test error: 9.2%
+Mon Dec 19 19:09:52 2016
+Epoch 0.28
+Minibatch loss: 0.366, learning rate: 0.014250
+Minibatch error: 9.0%
+Validation error: 7.8%
+Test error: 7.7%
+Mon Dec 19 19:09:54 2016
+Epoch 0.32
+Minibatch loss: 0.415, learning rate: 0.014250
+Minibatch error: 14.0%
+Validation error: 7.2%
+Test error: 7.5%
+Mon Dec 19 19:09:57 2016
+Epoch 0.35
+Minibatch loss: 0.497, learning rate: 0.014250
+Minibatch error: 13.0%
+Validation error: 6.6%
+Test error: 5.2%
+Mon Dec 19 19:09:59 2016
+Epoch 0.39
+Minibatch loss: 0.378, learning rate: 0.014250
+Minibatch error: 11.0%
+Validation error: 7.2%
+Test error: 6.4%
+Mon Dec 19 19:10:01 2016
+Epoch 0.42
+Minibatch loss: 0.241, learning rate: 0.014250
+Minibatch error: 6.0%
+Validation error: 7.3%
+Test error: 7.5%
+Mon Dec 19 19:10:03 2016
+Epoch 0.46
+Minibatch loss: 0.246, learning rate: 0.014250
+Minibatch error: 8.0%
+Validation error: 7.2%
+Test error: 5.5%
+Mon Dec 19 19:10:05 2016
+Epoch 0.49
+Minibatch loss: 0.504, learning rate: 0.014250
+Minibatch error: 17.0%
+Validation error: 6.2%
+Test error: 5.3%
+Mon Dec 19 19:10:07 2016
+Epoch 0.53
+Minibatch loss: 0.376, learning rate: 0.014250
+Minibatch error: 11.0%
+Validation error: 6.0%
+Test error: 4.6%
+Mon Dec 19 19:10:09 2016
+Epoch 0.56
+Minibatch loss: 0.290, learning rate: 0.014250
+Minibatch error: 8.0%
+Validation error: 5.9%
+Test error: 5.0%
+Mon Dec 19 19:10:11 2016
+Epoch 0.60
+Minibatch loss: 0.364, learning rate: 0.014250
+Minibatch error: 6.0%
+Validation error: 6.1%
+Test error: 5.2%
+Mon Dec 19 19:10:14 2016
+Epoch 0.63
+Minibatch loss: 0.411, learning rate: 0.014250
+Minibatch error: 13.0%
+Validation error: 6.4%
+Test error: 7.6%
+Mon Dec 19 19:10:16 2016
+Epoch 0.67
+Minibatch loss: 0.373, learning rate: 0.014250
+Minibatch error: 12.0%
+Validation error: 5.8%
+Test error: 5.8%
+Mon Dec 19 19:10:18 2016
+Epoch 0.70
+Minibatch loss: 0.585, learning rate: 0.014250
+Minibatch error: 14.0%
+Validation error: 5.2%
+Test error: 5.6%
+Mon Dec 19 19:10:20 2016
+Epoch 0.74
+Minibatch loss: 0.230, learning rate: 0.014250
+Minibatch error: 7.0%
+Validation error: 5.6%
+Test error: 5.5%
+Mon Dec 19 19:10:22 2016
+Epoch 0.77
+Minibatch loss: 0.215, learning rate: 0.014250
+Minibatch error: 6.0%
+Validation error: 5.3%
+Test error: 6.8%
+Mon Dec 19 19:10:24 2016
+Epoch 0.81
+Minibatch loss: 0.476, learning rate: 0.014250
+Minibatch error: 12.0%
+Validation error: 7.3%
+Test error: 5.0%
+Mon Dec 19 19:10:26 2016
+Epoch 0.84
+Minibatch loss: 0.471, learning rate: 0.014250
+Minibatch error: 16.0%
+Validation error: 6.1%
+Test error: 5.5%
+Mon Dec 19 19:10:28 2016
+Epoch 0.88
+Minibatch loss: 0.387, learning rate: 0.014250
+Minibatch error: 11.0%
+Validation error: 5.2%
+Test error: 4.8%
+Mon Dec 19 19:10:31 2016
+Epoch 0.91
+Minibatch loss: 0.282, learning rate: 0.014250
+Minibatch error: 8.0%
+Validation error: 4.8%
+Test error: 4.9%
+Mon Dec 19 19:10:33 2016
+Epoch 0.95
+Minibatch loss: 0.215, learning rate: 0.014250
+Minibatch error: 3.0%
+Validation error: 4.8%
+Test error: 3.5%
+Mon Dec 19 19:10:35 2016
+Epoch 0.98
+Minibatch loss: 0.269, learning rate: 0.014250
+Minibatch error: 7.0%
+Validation error: 3.9%
+Test error: 4.5%
+Mon Dec 19 19:10:37 2016
+Final test error: 5.8%
+Best test error: 3.5%
+TRAINING SESSION STARTING: 1 3
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 3
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data3.raw.gz
+Extracting labels: data/labels3.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.466, learning rate: 0.013537
+Minibatch error: 14.0%
+Validation error: 5.1%
+Test error: 5.9%
+Mon Dec 19 19:10:49 2016
+Epoch 0.04
+Minibatch loss: 0.299, learning rate: 0.013537
+Minibatch error: 6.0%
+Validation error: 3.0%
+Test error: 5.1%
+Mon Dec 19 19:10:51 2016
+Epoch 0.07
+Minibatch loss: 0.276, learning rate: 0.013537
+Minibatch error: 7.0%
+Validation error: 3.3%
+Test error: 3.8%
+Mon Dec 19 19:10:53 2016
+Epoch 0.11
+Minibatch loss: 0.209, learning rate: 0.013537
+Minibatch error: 3.0%
+Validation error: 3.5%
+Test error: 3.6%
+Mon Dec 19 19:10:55 2016
+Epoch 0.14
+Minibatch loss: 0.317, learning rate: 0.013537
+Minibatch error: 8.0%
+Validation error: 3.2%
+Test error: 4.0%
+Mon Dec 19 19:10:58 2016
+Epoch 0.18
+Minibatch loss: 0.353, learning rate: 0.013537
+Minibatch error: 11.0%
+Validation error: 2.7%
+Test error: 3.3%
+Mon Dec 19 19:11:00 2016
+Epoch 0.21
+Minibatch loss: 0.212, learning rate: 0.013537
+Minibatch error: 5.0%
+Validation error: 2.5%
+Test error: 2.4%
+Mon Dec 19 19:11:02 2016
+Epoch 0.25
+Minibatch loss: 0.226, learning rate: 0.013537
+Minibatch error: 5.0%
+Validation error: 3.7%
+Test error: 5.9%
+Mon Dec 19 19:11:04 2016
+Epoch 0.28
+Minibatch loss: 0.269, learning rate: 0.013537
+Minibatch error: 6.0%
+Validation error: 1.8%
+Test error: 2.3%
+Mon Dec 19 19:11:06 2016
+Epoch 0.32
+Minibatch loss: 0.274, learning rate: 0.013537
+Minibatch error: 6.0%
+Validation error: 2.6%
+Test error: 3.0%
+Mon Dec 19 19:11:08 2016
+Epoch 0.35
+Minibatch loss: 0.435, learning rate: 0.013537
+Minibatch error: 9.0%
+Validation error: 3.2%
+Test error: 2.8%
+Mon Dec 19 19:11:10 2016
+Epoch 0.39
+Minibatch loss: 0.268, learning rate: 0.013537
+Minibatch error: 6.0%
+Validation error: 2.2%
+Test error: 2.4%
+Mon Dec 19 19:11:12 2016
+Epoch 0.42
+Minibatch loss: 0.399, learning rate: 0.013537
+Minibatch error: 9.0%
+Validation error: 2.1%
+Test error: 2.0%
+Mon Dec 19 19:11:14 2016
+Epoch 0.46
+Minibatch loss: 0.203, learning rate: 0.013537
+Minibatch error: 5.0%
+Validation error: 2.9%
+Test error: 3.5%
+Mon Dec 19 19:11:17 2016
+Epoch 0.49
+Minibatch loss: 0.218, learning rate: 0.013537
+Minibatch error: 5.0%
+Validation error: 3.4%
+Test error: 4.4%
+Mon Dec 19 19:11:19 2016
+Epoch 0.53
+Minibatch loss: 0.238, learning rate: 0.013537
+Minibatch error: 7.0%
+Validation error: 3.0%
+Test error: 3.0%
+Mon Dec 19 19:11:21 2016
+Epoch 0.56
+Minibatch loss: 0.292, learning rate: 0.013537
+Minibatch error: 3.0%
+Validation error: 2.4%
+Test error: 2.5%
+Mon Dec 19 19:11:23 2016
+Epoch 0.60
+Minibatch loss: 0.252, learning rate: 0.013537
+Minibatch error: 8.0%
+Validation error: 2.6%
+Test error: 3.3%
+Mon Dec 19 19:11:25 2016
+Epoch 0.63
+Minibatch loss: 0.243, learning rate: 0.013537
+Minibatch error: 3.0%
+Validation error: 2.7%
+Test error: 3.9%
+Mon Dec 19 19:11:27 2016
+Epoch 0.67
+Minibatch loss: 0.123, learning rate: 0.013537
+Minibatch error: 2.0%
+Validation error: 2.9%
+Test error: 3.2%
+Mon Dec 19 19:11:29 2016
+Epoch 0.70
+Minibatch loss: 0.259, learning rate: 0.013537
+Minibatch error: 4.0%
+Validation error: 2.2%
+Test error: 2.9%
+Mon Dec 19 19:11:31 2016
+Epoch 0.74
+Minibatch loss: 0.252, learning rate: 0.013537
+Minibatch error: 8.0%
+Validation error: 3.6%
+Test error: 5.0%
+Mon Dec 19 19:11:34 2016
+Epoch 0.77
+Minibatch loss: 0.240, learning rate: 0.013537
+Minibatch error: 5.0%
+Validation error: 2.3%
+Test error: 3.3%
+Mon Dec 19 19:11:36 2016
+Epoch 0.81
+Minibatch loss: 0.270, learning rate: 0.013537
+Minibatch error: 11.0%
+Validation error: 2.9%
+Test error: 3.6%
+Mon Dec 19 19:11:38 2016
+Epoch 0.84
+Minibatch loss: 0.240, learning rate: 0.013537
+Minibatch error: 5.0%
+Validation error: 2.2%
+Test error: 2.5%
+Mon Dec 19 19:11:40 2016
+Epoch 0.88
+Minibatch loss: 0.298, learning rate: 0.013537
+Minibatch error: 6.0%
+Validation error: 2.1%
+Test error: 2.8%
+Mon Dec 19 19:11:42 2016
+Epoch 0.91
+Minibatch loss: 0.325, learning rate: 0.013537
+Minibatch error: 10.0%
+Validation error: 3.0%
+Test error: 2.7%
+Mon Dec 19 19:11:44 2016
+Epoch 0.95
+Minibatch loss: 0.202, learning rate: 0.013537
+Minibatch error: 6.0%
+Validation error: 2.2%
+Test error: 2.1%
+Mon Dec 19 19:11:46 2016
+Epoch 0.98
+Minibatch loss: 0.128, learning rate: 0.013537
+Minibatch error: 1.0%
+Validation error: 2.8%
+Test error: 3.0%
+Mon Dec 19 19:11:48 2016
+Final test error: 2.0%
+Best test error: 2.0%
+TRAINING SESSION STARTING: 1 4
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 4
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data4.raw.gz
+Extracting labels: data/labels4.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.229, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 2.4%
+Test error: 1.8%
+Mon Dec 19 19:12:00 2016
+Epoch 0.04
+Minibatch loss: 0.238, learning rate: 0.012861
+Minibatch error: 7.0%
+Validation error: 1.6%
+Test error: 3.9%
+Mon Dec 19 19:12:02 2016
+Epoch 0.07
+Minibatch loss: 0.177, learning rate: 0.012861
+Minibatch error: 2.0%
+Validation error: 1.6%
+Test error: 2.6%
+Mon Dec 19 19:12:05 2016
+Epoch 0.11
+Minibatch loss: 0.320, learning rate: 0.012861
+Minibatch error: 9.0%
+Validation error: 1.8%
+Test error: 2.4%
+Mon Dec 19 19:12:07 2016
+Epoch 0.14
+Minibatch loss: 0.202, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.8%
+Test error: 3.4%
+Mon Dec 19 19:12:09 2016
+Epoch 0.18
+Minibatch loss: 0.211, learning rate: 0.012861
+Minibatch error: 6.0%
+Validation error: 2.0%
+Test error: 2.3%
+Mon Dec 19 19:12:11 2016
+Epoch 0.21
+Minibatch loss: 0.156, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 1.6%
+Test error: 2.2%
+Mon Dec 19 19:12:13 2016
+Epoch 0.25
+Minibatch loss: 0.157, learning rate: 0.012861
+Minibatch error: 2.0%
+Validation error: 1.6%
+Test error: 1.9%
+Mon Dec 19 19:12:15 2016
+Epoch 0.28
+Minibatch loss: 0.182, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.4%
+Test error: 2.3%
+Mon Dec 19 19:12:17 2016
+Epoch 0.32
+Minibatch loss: 0.196, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.0%
+Test error: 1.7%
+Mon Dec 19 19:12:19 2016
+Epoch 0.35
+Minibatch loss: 0.211, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.3%
+Test error: 2.9%
+Mon Dec 19 19:12:22 2016
+Epoch 0.39
+Minibatch loss: 0.203, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 2.4%
+Mon Dec 19 19:12:24 2016
+Epoch 0.42
+Minibatch loss: 0.175, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.1%
+Test error: 2.2%
+Mon Dec 19 19:12:26 2016
+Epoch 0.46
+Minibatch loss: 0.158, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.2%
+Test error: 2.0%
+Mon Dec 19 19:12:28 2016
+Epoch 0.49
+Minibatch loss: 0.134, learning rate: 0.012861
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 2.4%
+Mon Dec 19 19:12:30 2016
+Epoch 0.53
+Minibatch loss: 0.125, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 2.5%
+Mon Dec 19 19:12:32 2016
+Epoch 0.56
+Minibatch loss: 0.236, learning rate: 0.012861
+Minibatch error: 7.0%
+Validation error: 1.2%
+Test error: 2.0%
+Mon Dec 19 19:12:34 2016
+Epoch 0.60
+Minibatch loss: 0.091, learning rate: 0.012861
+Minibatch error: 1.0%
+Validation error: 1.4%
+Test error: 2.0%
+Mon Dec 19 19:12:36 2016
+Epoch 0.63
+Minibatch loss: 0.127, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 1.0%
+Test error: 2.5%
+Mon Dec 19 19:12:38 2016
+Epoch 0.67
+Minibatch loss: 0.129, learning rate: 0.012861
+Minibatch error: 2.0%
+Validation error: 1.8%
+Test error: 2.3%
+Mon Dec 19 19:12:41 2016
+Epoch 0.70
+Minibatch loss: 0.151, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 1.7%
+Test error: 2.7%
+Mon Dec 19 19:12:43 2016
+Epoch 0.74
+Minibatch loss: 0.198, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.6%
+Test error: 1.7%
+Mon Dec 19 19:12:45 2016
+Epoch 0.77
+Minibatch loss: 0.150, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 1.8%
+Test error: 2.2%
+Mon Dec 19 19:12:47 2016
+Epoch 0.81
+Minibatch loss: 0.147, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 1.5%
+Test error: 1.8%
+Mon Dec 19 19:12:49 2016
+Epoch 0.84
+Minibatch loss: 0.146, learning rate: 0.012861
+Minibatch error: 4.0%
+Validation error: 1.7%
+Test error: 2.5%
+Mon Dec 19 19:12:51 2016
+Epoch 0.88
+Minibatch loss: 0.179, learning rate: 0.012861
+Minibatch error: 6.0%
+Validation error: 1.2%
+Test error: 2.1%
+Mon Dec 19 19:12:53 2016
+Epoch 0.91
+Minibatch loss: 0.137, learning rate: 0.012861
+Minibatch error: 3.0%
+Validation error: 2.3%
+Test error: 3.4%
+Mon Dec 19 19:12:55 2016
+Epoch 0.95
+Minibatch loss: 0.137, learning rate: 0.012861
+Minibatch error: 1.0%
+Validation error: 1.9%
+Test error: 1.8%
+Mon Dec 19 19:12:58 2016
+Epoch 0.98
+Minibatch loss: 0.165, learning rate: 0.012861
+Minibatch error: 5.0%
+Validation error: 1.3%
+Test error: 2.3%
+Mon Dec 19 19:13:00 2016
+Final test error: 2.2%
+Best test error: 1.7%
+TRAINING SESSION STARTING: 2 1
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 1
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data1.raw.gz
+Extracting labels: data/labels1.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.227, learning rate: 0.012218
+Minibatch error: 4.0%
+Validation error: 1.2%
+Test error: 2.2%
+Mon Dec 19 19:13:12 2016
+Epoch 0.04
+Minibatch loss: 0.137, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 0.4%
+Test error: 2.6%
+Mon Dec 19 19:13:14 2016
+Epoch 0.07
+Minibatch loss: 0.110, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 0.7%
+Test error: 1.5%
+Mon Dec 19 19:13:16 2016
+Epoch 0.11
+Minibatch loss: 0.217, learning rate: 0.012218
+Minibatch error: 6.0%
+Validation error: 0.8%
+Test error: 2.0%
+Mon Dec 19 19:13:18 2016
+Epoch 0.14
+Minibatch loss: 0.134, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 1.6%
+Mon Dec 19 19:13:20 2016
+Epoch 0.18
+Minibatch loss: 0.163, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 0.7%
+Test error: 1.6%
+Mon Dec 19 19:13:22 2016
+Epoch 0.21
+Minibatch loss: 0.132, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 1.1%
+Test error: 2.3%
+Mon Dec 19 19:13:24 2016
+Epoch 0.25
+Minibatch loss: 0.148, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 1.8%
+Mon Dec 19 19:13:26 2016
+Epoch 0.28
+Minibatch loss: 0.192, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 1.2%
+Test error: 2.2%
+Mon Dec 19 19:13:29 2016
+Epoch 0.32
+Minibatch loss: 0.258, learning rate: 0.012218
+Minibatch error: 7.0%
+Validation error: 1.1%
+Test error: 1.8%
+Mon Dec 19 19:13:31 2016
+Epoch 0.35
+Minibatch loss: 0.135, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 1.2%
+Test error: 2.3%
+Mon Dec 19 19:13:33 2016
+Epoch 0.39
+Minibatch loss: 0.141, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 0.8%
+Test error: 2.7%
+Mon Dec 19 19:13:35 2016
+Epoch 0.42
+Minibatch loss: 0.231, learning rate: 0.012218
+Minibatch error: 6.0%
+Validation error: 1.3%
+Test error: 2.2%
+Mon Dec 19 19:13:37 2016
+Epoch 0.46
+Minibatch loss: 0.103, learning rate: 0.012218
+Minibatch error: 1.0%
+Validation error: 1.4%
+Test error: 2.2%
+Mon Dec 19 19:13:39 2016
+Epoch 0.49
+Minibatch loss: 0.088, learning rate: 0.012218
+Minibatch error: 0.0%
+Validation error: 1.2%
+Test error: 2.0%
+Mon Dec 19 19:13:41 2016
+Epoch 0.53
+Minibatch loss: 0.198, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 1.2%
+Test error: 2.6%
+Mon Dec 19 19:13:43 2016
+Epoch 0.56
+Minibatch loss: 0.207, learning rate: 0.012218
+Minibatch error: 5.0%
+Validation error: 0.8%
+Test error: 2.0%
+Mon Dec 19 19:13:45 2016
+Epoch 0.60
+Minibatch loss: 0.192, learning rate: 0.012218
+Minibatch error: 4.0%
+Validation error: 0.7%
+Test error: 1.8%
+Mon Dec 19 19:13:48 2016
+Epoch 0.63
+Minibatch loss: 0.089, learning rate: 0.012218
+Minibatch error: 0.0%
+Validation error: 1.7%
+Test error: 1.4%
+Mon Dec 19 19:13:50 2016
+Epoch 0.67
+Minibatch loss: 0.088, learning rate: 0.012218
+Minibatch error: 1.0%
+Validation error: 1.1%
+Test error: 1.7%
+Mon Dec 19 19:13:52 2016
+Epoch 0.70
+Minibatch loss: 0.248, learning rate: 0.012218
+Minibatch error: 7.0%
+Validation error: 0.8%
+Test error: 2.1%
+Mon Dec 19 19:13:54 2016
+Epoch 0.74
+Minibatch loss: 0.118, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 2.5%
+Mon Dec 19 19:13:56 2016
+Epoch 0.77
+Minibatch loss: 0.111, learning rate: 0.012218
+Minibatch error: 1.0%
+Validation error: 0.8%
+Test error: 2.0%
+Mon Dec 19 19:13:58 2016
+Epoch 0.81
+Minibatch loss: 0.130, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 0.9%
+Test error: 2.9%
+Mon Dec 19 19:14:00 2016
+Epoch 0.84
+Minibatch loss: 0.102, learning rate: 0.012218
+Minibatch error: 2.0%
+Validation error: 0.8%
+Test error: 2.1%
+Mon Dec 19 19:14:02 2016
+Epoch 0.88
+Minibatch loss: 0.149, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 0.8%
+Test error: 1.8%
+Mon Dec 19 19:14:05 2016
+Epoch 0.91
+Minibatch loss: 0.148, learning rate: 0.012218
+Minibatch error: 3.0%
+Validation error: 1.2%
+Test error: 2.0%
+Mon Dec 19 19:14:07 2016
+Epoch 0.95
+Minibatch loss: 0.218, learning rate: 0.012218
+Minibatch error: 6.0%
+Validation error: 1.3%
+Test error: 2.0%
+Mon Dec 19 19:14:09 2016
+Epoch 0.98
+Minibatch loss: 0.144, learning rate: 0.012218
+Minibatch error: 4.0%
+Validation error: 0.8%
+Test error: 1.8%
+Mon Dec 19 19:14:11 2016
+Final test error: 1.7%
+Best test error: 1.4%
+TRAINING SESSION STARTING: 2 2
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 2
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data2.raw.gz
+Extracting labels: data/labels2.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.133, learning rate: 0.011607
+Minibatch error: 4.0%
+Validation error: 1.7%
+Test error: 1.5%
+Mon Dec 19 19:14:23 2016
+Epoch 0.04
+Minibatch loss: 0.105, learning rate: 0.011607
+Minibatch error: 2.0%
+Validation error: 1.0%
+Test error: 1.8%
+Mon Dec 19 19:14:25 2016
+Epoch 0.07
+Minibatch loss: 0.099, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 1.7%
+Mon Dec 19 19:14:27 2016
+Epoch 0.11
+Minibatch loss: 0.133, learning rate: 0.011607
+Minibatch error: 2.0%
+Validation error: 0.8%
+Test error: 2.6%
+Mon Dec 19 19:14:29 2016
+Epoch 0.14
+Minibatch loss: 0.080, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 1.5%
+Mon Dec 19 19:14:31 2016
+Epoch 0.18
+Minibatch loss: 0.309, learning rate: 0.011607
+Minibatch error: 7.0%
+Validation error: 1.0%
+Test error: 1.7%
+Mon Dec 19 19:14:34 2016
+Epoch 0.21
+Minibatch loss: 0.151, learning rate: 0.011607
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 1.9%
+Mon Dec 19 19:14:36 2016
+Epoch 0.25
+Minibatch loss: 0.099, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.2%
+Test error: 1.9%
+Mon Dec 19 19:14:38 2016
+Epoch 0.28
+Minibatch loss: 0.098, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 1.6%
+Mon Dec 19 19:14:40 2016
+Epoch 0.32
+Minibatch loss: 0.111, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.1%
+Test error: 2.1%
+Mon Dec 19 19:14:42 2016
+Epoch 0.35
+Minibatch loss: 0.109, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 0.8%
+Test error: 1.6%
+Mon Dec 19 19:14:44 2016
+Epoch 0.39
+Minibatch loss: 0.118, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.2%
+Test error: 1.6%
+Mon Dec 19 19:14:46 2016
+Epoch 0.42
+Minibatch loss: 0.219, learning rate: 0.011607
+Minibatch error: 4.0%
+Validation error: 1.2%
+Test error: 1.4%
+Mon Dec 19 19:14:48 2016
+Epoch 0.46
+Minibatch loss: 0.137, learning rate: 0.011607
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 1.8%
+Mon Dec 19 19:14:50 2016
+Epoch 0.49
+Minibatch loss: 0.088, learning rate: 0.011607
+Minibatch error: 0.0%
+Validation error: 0.6%
+Test error: 1.5%
+Mon Dec 19 19:14:53 2016
+Epoch 0.53
+Minibatch loss: 0.079, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.1%
+Test error: 1.5%
+Mon Dec 19 19:14:55 2016
+Epoch 0.56
+Minibatch loss: 0.095, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 1.8%
+Mon Dec 19 19:14:57 2016
+Epoch 0.60
+Minibatch loss: 0.082, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 0.8%
+Test error: 1.5%
+Mon Dec 19 19:14:59 2016
+Epoch 0.63
+Minibatch loss: 0.133, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 1.5%
+Mon Dec 19 19:15:01 2016
+Epoch 0.67
+Minibatch loss: 0.128, learning rate: 0.011607
+Minibatch error: 2.0%
+Validation error: 0.8%
+Test error: 1.1%
+Mon Dec 19 19:15:03 2016
+Epoch 0.70
+Minibatch loss: 0.137, learning rate: 0.011607
+Minibatch error: 3.0%
+Validation error: 1.0%
+Test error: 1.5%
+Mon Dec 19 19:15:05 2016
+Epoch 0.74
+Minibatch loss: 0.105, learning rate: 0.011607
+Minibatch error: 1.0%
+Validation error: 0.8%
+Test error: 1.6%
+Mon Dec 19 19:15:07 2016
+Epoch 0.77
+Minibatch loss: 0.146, learning rate: 0.011607
+Minibatch error: 4.0%
+Validation error: 1.0%
+Test error: 2.5%
+Mon Dec 19 19:15:10 2016
+Epoch 0.81
+Minibatch loss: 0.118, learning rate: 0.011607
+Minibatch error: 2.0%
+Validation error: 0.8%
+Test error: 1.6%
+Mon Dec 19 19:15:12 2016
+Epoch 0.84
+Minibatch loss: 0.114, learning rate: 0.011607
+Minibatch error: 3.0%
+Validation error: 0.8%
+Test error: 1.8%
+Mon Dec 19 19:15:14 2016
+Epoch 0.88
+Minibatch loss: 0.148, learning rate: 0.011607
+Minibatch error: 3.0%
+Validation error: 0.7%
+Test error: 1.7%
+Mon Dec 19 19:15:16 2016
+Epoch 0.91
+Minibatch loss: 0.101, learning rate: 0.011607
+Minibatch error: 2.0%
+Validation error: 0.6%
+Test error: 1.7%
+Mon Dec 19 19:15:18 2016
+Epoch 0.95
+Minibatch loss: 0.143, learning rate: 0.011607
+Minibatch error: 5.0%
+Validation error: 1.1%
+Test error: 2.4%
+Mon Dec 19 19:15:20 2016
+Epoch 0.98
+Minibatch loss: 0.206, learning rate: 0.011607
+Minibatch error: 4.0%
+Validation error: 1.1%
+Test error: 3.5%
+Mon Dec 19 19:15:22 2016
+Final test error: 1.8%
+Best test error: 1.1%
+TRAINING SESSION STARTING: 2 3
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 3
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data3.raw.gz
+Extracting labels: data/labels3.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.135, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.6%
+Test error: 1.8%
+Mon Dec 19 19:15:34 2016
+Epoch 0.04
+Minibatch loss: 0.126, learning rate: 0.011026
+Minibatch error: 4.0%
+Validation error: 0.4%
+Test error: 1.3%
+Mon Dec 19 19:15:36 2016
+Epoch 0.07
+Minibatch loss: 0.095, learning rate: 0.011026
+Minibatch error: 1.0%
+Validation error: 0.8%
+Test error: 1.7%
+Mon Dec 19 19:15:38 2016
+Epoch 0.11
+Minibatch loss: 0.073, learning rate: 0.011026
+Minibatch error: 0.0%
+Validation error: 0.5%
+Test error: 1.6%
+Mon Dec 19 19:15:41 2016
+Epoch 0.14
+Minibatch loss: 0.066, learning rate: 0.011026
+Minibatch error: 0.0%
+Validation error: 0.7%
+Test error: 1.1%
+Mon Dec 19 19:15:43 2016
+Epoch 0.18
+Minibatch loss: 0.119, learning rate: 0.011026
+Minibatch error: 1.0%
+Validation error: 0.5%
+Test error: 1.2%
+Mon Dec 19 19:15:45 2016
+Epoch 0.21
+Minibatch loss: 0.144, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.4%
+Test error: 1.6%
+Mon Dec 19 19:15:47 2016
+Epoch 0.25
+Minibatch loss: 0.110, learning rate: 0.011026
+Minibatch error: 0.0%
+Validation error: 0.8%
+Test error: 1.8%
+Mon Dec 19 19:15:49 2016
+Epoch 0.28
+Minibatch loss: 0.149, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 1.0%
+Test error: 2.4%
+Mon Dec 19 19:15:51 2016
+Epoch 0.32
+Minibatch loss: 0.143, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.7%
+Test error: 1.3%
+Mon Dec 19 19:15:53 2016
+Epoch 0.35
+Minibatch loss: 0.169, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.8%
+Test error: 1.3%
+Mon Dec 19 19:15:55 2016
+Epoch 0.39
+Minibatch loss: 0.097, learning rate: 0.011026
+Minibatch error: 1.0%
+Validation error: 0.3%
+Test error: 1.6%
+Mon Dec 19 19:15:57 2016
+Epoch 0.42
+Minibatch loss: 0.132, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 1.0%
+Test error: 1.3%
+Mon Dec 19 19:16:00 2016
+Epoch 0.46
+Minibatch loss: 0.117, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.4%
+Test error: 1.9%
+Mon Dec 19 19:16:02 2016
+Epoch 0.49
+Minibatch loss: 0.105, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.6%
+Test error: 2.1%
+Mon Dec 19 19:16:04 2016
+Epoch 0.53
+Minibatch loss: 0.097, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 2.1%
+Mon Dec 19 19:16:06 2016
+Epoch 0.56
+Minibatch loss: 0.093, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 1.5%
+Mon Dec 19 19:16:08 2016
+Epoch 0.60
+Minibatch loss: 0.192, learning rate: 0.011026
+Minibatch error: 6.0%
+Validation error: 0.5%
+Test error: 1.4%
+Mon Dec 19 19:16:10 2016
+Epoch 0.63
+Minibatch loss: 0.103, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.3%
+Test error: 1.2%
+Mon Dec 19 19:16:12 2016
+Epoch 0.67
+Minibatch loss: 0.119, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 2.1%
+Mon Dec 19 19:16:14 2016
+Epoch 0.70
+Minibatch loss: 0.070, learning rate: 0.011026
+Minibatch error: 0.0%
+Validation error: 0.8%
+Test error: 1.7%
+Mon Dec 19 19:16:16 2016
+Epoch 0.74
+Minibatch loss: 0.092, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.2%
+Test error: 1.3%
+Mon Dec 19 19:16:19 2016
+Epoch 0.77
+Minibatch loss: 0.123, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.5%
+Test error: 1.2%
+Mon Dec 19 19:16:21 2016
+Epoch 0.81
+Minibatch loss: 0.123, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.3%
+Test error: 1.9%
+Mon Dec 19 19:16:23 2016
+Epoch 0.84
+Minibatch loss: 0.135, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.3%
+Test error: 1.4%
+Mon Dec 19 19:16:25 2016
+Epoch 0.88
+Minibatch loss: 0.110, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.4%
+Test error: 1.3%
+Mon Dec 19 19:16:27 2016
+Epoch 0.91
+Minibatch loss: 0.177, learning rate: 0.011026
+Minibatch error: 2.0%
+Validation error: 0.9%
+Test error: 1.7%
+Mon Dec 19 19:16:29 2016
+Epoch 0.95
+Minibatch loss: 0.121, learning rate: 0.011026
+Minibatch error: 3.0%
+Validation error: 0.5%
+Test error: 1.1%
+Mon Dec 19 19:16:31 2016
+Epoch 0.98
+Minibatch loss: 0.073, learning rate: 0.011026
+Minibatch error: 0.0%
+Validation error: 0.3%
+Test error: 1.2%
+Mon Dec 19 19:16:33 2016
+Final test error: 1.5%
+Best test error: 1.1%
+TRAINING SESSION STARTING: 2 4
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Data index: 4
+Base conv depth: 10
+FCL depth: 100
+LR init: 0.015
+LR decay: 0.95
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 100
+Extracting data: data/data4.raw.gz
+Extracting labels: data/labels4.raw.gz
+Extracting data: data/data-test.raw.gz
+Extracting labels: data/labels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 0.078, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.5%
+Test error: 1.5%
+Mon Dec 19 19:16:45 2016
+Epoch 0.04
+Minibatch loss: 0.128, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.2%
+Test error: 1.1%
+Mon Dec 19 19:16:47 2016
+Epoch 0.07
+Minibatch loss: 0.064, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.5%
+Test error: 1.9%
+Mon Dec 19 19:16:50 2016
+Epoch 0.11
+Minibatch loss: 0.084, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.3%
+Test error: 1.8%
+Mon Dec 19 19:16:52 2016
+Epoch 0.14
+Minibatch loss: 0.094, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.4%
+Test error: 1.3%
+Mon Dec 19 19:16:54 2016
+Epoch 0.18
+Minibatch loss: 0.115, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.2%
+Test error: 1.9%
+Mon Dec 19 19:16:56 2016
+Epoch 0.21
+Minibatch loss: 0.072, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.7%
+Test error: 1.3%
+Mon Dec 19 19:16:58 2016
+Epoch 0.25
+Minibatch loss: 0.104, learning rate: 0.010475
+Minibatch error: 3.0%
+Validation error: 0.7%
+Test error: 1.9%
+Mon Dec 19 19:17:00 2016
+Epoch 0.28
+Minibatch loss: 0.081, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.5%
+Test error: 1.2%
+Mon Dec 19 19:17:02 2016
+Epoch 0.32
+Minibatch loss: 0.103, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.3%
+Test error: 1.3%
+Mon Dec 19 19:17:04 2016
+Epoch 0.35
+Minibatch loss: 0.087, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.3%
+Test error: 1.5%
+Mon Dec 19 19:17:06 2016
+Epoch 0.39
+Minibatch loss: 0.078, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.7%
+Test error: 0.9%
+Mon Dec 19 19:17:08 2016
+Epoch 0.42
+Minibatch loss: 0.180, learning rate: 0.010475
+Minibatch error: 4.0%
+Validation error: 0.2%
+Test error: 1.3%
+Mon Dec 19 19:17:11 2016
+Epoch 0.46
+Minibatch loss: 0.074, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.3%
+Test error: 1.0%
+Mon Dec 19 19:17:13 2016
+Epoch 0.49
+Minibatch loss: 0.104, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 1.0%
+Test error: 1.8%
+Mon Dec 19 19:17:15 2016
+Epoch 0.53
+Minibatch loss: 0.105, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.7%
+Test error: 1.3%
+Mon Dec 19 19:17:17 2016
+Epoch 0.56
+Minibatch loss: 0.153, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.3%
+Test error: 1.8%
+Mon Dec 19 19:17:19 2016
+Epoch 0.60
+Minibatch loss: 0.092, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.4%
+Test error: 1.3%
+Mon Dec 19 19:17:21 2016
+Epoch 0.63
+Minibatch loss: 0.111, learning rate: 0.010475
+Minibatch error: 3.0%
+Validation error: 0.8%
+Test error: 1.6%
+Mon Dec 19 19:17:23 2016
+Epoch 0.67
+Minibatch loss: 0.083, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.3%
+Test error: 1.4%
+Mon Dec 19 19:17:25 2016
+Epoch 0.70
+Minibatch loss: 0.086, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.5%
+Test error: 1.6%
+Mon Dec 19 19:17:27 2016
+Epoch 0.74
+Minibatch loss: 0.118, learning rate: 0.010475
+Minibatch error: 4.0%
+Validation error: 0.4%
+Test error: 1.3%
+Mon Dec 19 19:17:30 2016
+Epoch 0.77
+Minibatch loss: 0.098, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.7%
+Test error: 1.3%
+Mon Dec 19 19:17:32 2016
+Epoch 0.81
+Minibatch loss: 0.086, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.7%
+Test error: 1.5%
+Mon Dec 19 19:17:34 2016
+Epoch 0.84
+Minibatch loss: 0.077, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 1.5%
+Mon Dec 19 19:17:36 2016
+Epoch 0.88
+Minibatch loss: 0.170, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.9%
+Test error: 1.4%
+Mon Dec 19 19:17:38 2016
+Epoch 0.91
+Minibatch loss: 0.109, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.9%
+Test error: 1.3%
+Mon Dec 19 19:17:40 2016
+Epoch 0.95
+Minibatch loss: 0.104, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 1.0%
+Test error: 1.4%
+Mon Dec 19 19:17:42 2016
+Epoch 0.98
+Minibatch loss: 0.099, learning rate: 0.010475
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 1.6%
+Mon Dec 19 19:17:44 2016
+Final test error: 1.8%
+Best test error: 0.9%

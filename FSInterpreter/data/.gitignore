@@ -1,0 +1,27 @@
+# Actual data files are too large for repo.  Here's a listing to show the 
+# normal contents:
+#
+# ~/tensorflow/tensorflow/fs-interpreter/FSInterpreter/data$ ls -l
+# total 1218412
+# -rw------- 1 rboyer rboyer  14356923 Dec 10 23:04 clipData-test.raw.gz
+# -rw------- 1 rboyer rboyer  70344897 Dec 10 23:01 clipData-train.raw.gz
+# -rw------- 1 rboyer rboyer        69 Dec 10 23:04 clipLabels-test.raw.gz
+# -rw------- 1 rboyer rboyer        96 Dec 10 23:01 clipLabels-train.raw.gz
+# -rw------- 1 rboyer rboyer 289186781 Dec 10 22:53 data1.raw.gz
+# -rw------- 1 rboyer rboyer 289241144 Dec 10 22:53 data2.raw.gz
+# -rw------- 1 rboyer rboyer 289255875 Dec 10 22:53 data3.raw.gz
+# -rw------- 1 rboyer rboyer 289306887 Dec 10 22:53 data4.raw.gz
+# -rw------- 1 rboyer rboyer   5912533 Dec 10 22:58 data-test.raw.gz
+# -rw------- 1 rboyer rboyer      2535 Dec 10 22:53 labels1.raw.gz
+# -rw------- 1 rboyer rboyer      2535 Dec 10 22:53 labels2.raw.gz
+# -rw------- 1 rboyer rboyer      2535 Dec 10 22:53 labels3.raw.gz
+# -rw------- 1 rboyer rboyer      2535 Dec 10 22:53 labels4.raw.gz
+# -rw------- 1 rboyer rboyer       124 Dec 10 22:58 labels-test.raw.gz
+#
+# These files can be generated using the FSI Data Collection Tool and *lots* of
+# time...
+#
+# Ignore everything in this directory
+*
+# Except this file
+!.gitignore

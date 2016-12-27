@@ -1,0 +1,118 @@
+Summary CLD/BS
+==============
+DS: 142500x3192, KS: 5555, CLD: 6, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 80
+1.x: 3
+2.x: 244
+3.x: 619
+
+DS: 142500x3192, KS: 5555, CLD: 6, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 13
+2.x: 169
+3.x: 426
+
+DS: 142500x3192, KS: 5555, CLD: 6, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 120
+1.x: 7
+
+DS: 142500x3192, KS: 5555, CLD: 8, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 80
+1.x: 60
+2.x: 623
+
+DS: 142500x3192, KS: 5555, CLD: 8, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 38
+2.x: 548
+
+DS: 142500x3192, KS: 5555, CLD: 8, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 120
+1.x: 1
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 80
+1.x: 193
+2.x: 808
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 78
+2.x: 576
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 120
+1.x: 49
+
+RESULTS: CLD 10, BS 80 best.  However, BS 80 implies more training steps and previous tests indicated BS 100 was slightly better.
+USING: CLD 10, BS 100
+
+
+Summary CLD/FCL
+===============
+DS: 142500x3192, KS: 5555, CLD: 8, FCL: 80, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 50
+2.x: 528
+
+DS: 142500x3192, KS: 5555, CLD: 8, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 47
+2.x: 397
+
+DS: 142500x3192, KS: 5555, CLD: 8, FCL: 120, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 3
+
+DS: 142500x3192, KS: 5555, CLD: 9, FCL: 80, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 21
+2.x: 389
+
+DS: 142500x3192, KS: 5555, CLD: 9, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 82
+2.x: 549
+
+DS: 142500x3192, KS: 5555, CLD: 9, FCL: 120, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 101
+2.x: 405
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 80, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 124
+2.x: 531
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 152
+2.x: 640
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 120, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 83
+
+RESULTS: CLD 10, FCL 100 best.
+
+
+Summary DOKeepProb/L2Reg
+========================
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0001, BS: 100
+1.x: 134
+2.x: 611
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+1.x: 199
+2.x: 637
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.001, BS: 100
+1.x: 59
+2.x: 633
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.65, L2Reg: 0.0001, BS: 100
+1.x: 75
+2.x: 600
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.65, L2Reg: 0.0005, BS: 100
+1.x: 99
+2.x: 537
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.65, L2Reg: 0.001, BS: 100
+1.x: 82
+2.x: 492
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0001, BS: 100
+1.x: 17
+2.x: 633
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.0005, BS: 100
+1.x: 94
+2.x: 594
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.8, L2Reg: 0.001, BS: 100
+1.x: 5
+
+RESULTS: DOKeepProb 0.5, L2Reg 0.0005 best.

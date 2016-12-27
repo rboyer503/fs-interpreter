@@ -1,0 +1,340 @@
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.074, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.5%
+Test error: 1.6%
+Mon Dec 19 17:23:42 2016
+Final test error: 1.6%
+Best test error: 1.2%
+
+Test error stats:
+# test error 1.x: 29
+# test error 2.x: 86
+# test error 3.x: 52
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.063, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.2%
+Test error: 3.2%
+Mon Dec 19 17:33:12 2016
+Final test error: 2.6%
+Best test error: 2.1%
+
+Test error stats:
+# test error 1.x: 0
+# test error 2.x: 43
+# test error 3.x: 89
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.077, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.1%
+Test error: 3.0%
+Mon Dec 19 17:42:42 2016
+Final test error: 2.5%
+Best test error: 1.8%
+
+Test error stats:
+# test error 1.x: 4
+# test error 2.x: 56
+# test error 3.x: 74
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.143, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.4%
+Test error: 3.2%
+Mon Dec 19 17:52:12 2016
+Final test error: 2.6%
+Best test error: 1.9%
+
+Test error stats:
+# test error 1.x: 2
+# test error 2.x: 74
+# test error 3.x: 63
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.176, learning rate: 0.010475
+Minibatch error: 5.0%
+Validation error: 0.4%
+Test error: 2.6%
+Mon Dec 19 18:01:42 2016
+Final test error: 2.4%
+Best test error: 1.8%
+
+Test error stats:
+# test error 1.x: 4
+# test error 2.x: 81
+# test error 3.x: 55
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.126, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.3%
+Test error: 1.8%
+Mon Dec 19 18:11:12 2016
+Final test error: 2.3%
+Best test error: 1.7%
+
+Test error stats:
+# test error 1.x: 16
+# test error 2.x: 94
+# test error 3.x: 54
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.126, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 2.3%
+Mon Dec 19 18:20:42 2016
+Final test error: 2.0%
+Best test error: 1.4%
+
+Test error stats:
+# test error 1.x: 36
+# test error 2.x: 95
+# test error 3.x: 37
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.095, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.5%
+Test error: 2.3%
+Mon Dec 19 18:30:12 2016
+Final test error: 2.3%
+Best test error: 2.3%
+
+Test error stats:
+# test error 1.x: 0
+# test error 2.x: 28
+# test error 3.x: 103
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.122, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.8%
+Test error: 2.4%
+Mon Dec 19 18:39:41 2016
+Final test error: 3.4%
+Best test error: 1.9%
+
+Test error stats:
+# test error 1.x: 4
+# test error 2.x: 74
+# test error 3.x: 72
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.262, learning rate: 0.010475
+Minibatch error: 4.0%
+Validation error: 0.7%
+Test error: 3.8%
+Mon Dec 19 18:49:12 2016
+Final test error: 2.9%
+Best test error: 2.1%
+
+Test error stats:
+# test error 1.x: 0
+# test error 2.x: 67
+# test error 3.x: 68
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.151, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.6%
+Test error: 2.8%
+Mon Dec 19 18:58:43 2016
+Final test error: 2.4%
+Best test error: 1.8%
+
+Test error stats:
+# test error 1.x: 8
+# test error 2.x: 99
+# test error 3.x: 44
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.079, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.3%
+Test error: 3.1%
+Mon Dec 19 19:08:13 2016
+Final test error: 2.3%
+Best test error: 1.9%
+
+Test error stats:
+# test error 1.x: 2
+# test error 2.x: 72
+# test error 3.x: 77
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.099, learning rate: 0.010475
+Minibatch error: 3.0%
+Validation error: 0.9%
+Test error: 1.6%
+Mon Dec 19 19:17:44 2016
+Final test error: 1.8%
+Best test error: 0.9%
+
+Test error stats:
+# test error 1.x: 93
+# test error 2.x: 58
+# test error 3.x: 17
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.073, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.4%
+Test error: 2.6%
+Mon Dec 19 19:27:14 2016
+Final test error: 2.7%
+Best test error: 1.5%
+
+Test error stats:
+# test error 1.x: 23
+# test error 2.x: 86
+# test error 3.x: 44
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.075, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.8%
+Test error: 2.2%
+Mon Dec 19 19:36:46 2016
+Final test error: 1.8%
+Best test error: 1.5%
+
+Test error stats:
+# test error 1.x: 28
+# test error 2.x: 83
+# test error 3.x: 51
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.066, learning rate: 0.010475
+Minibatch error: 0.0%
+Validation error: 0.7%
+Test error: 2.6%
+Mon Dec 19 19:46:18 2016
+Final test error: 3.0%
+Best test error: 2.3%
+
+Test error stats:
+# test error 1.x: 0
+# test error 2.x: 26
+# test error 3.x: 81
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.088, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 2.6%
+Mon Dec 19 19:55:48 2016
+Final test error: 2.8%
+Best test error: 2.3%
+
+Test error stats:
+# test error 1.x: 0
+# test error 2.x: 56
+# test error 3.x: 94
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.167, learning rate: 0.010475
+Minibatch error: 5.0%
+Validation error: 0.7%
+Test error: 2.3%
+Mon Dec 19 20:05:20 2016
+Final test error: 2.0%
+Best test error: 1.8%
+
+Test error stats:
+# test error 1.x: 3
+# test error 2.x: 89
+# test error 3.x: 54
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.063, learning rate: 0.010475
+Minibatch error: 1.0%
+Validation error: 0.3%
+Test error: 2.6%
+Mon Dec 19 20:14:51 2016
+Final test error: 1.7%
+Best test error: 1.3%
+
+Test error stats:
+# test error 1.x: 12
+# test error 2.x: 72
+# test error 3.x: 66
+----------
+
+DS: 142500x3192, KS: 5555, CLD: 10, FCL: 100, LRInit: 0.015, LRDecay: 0.95, DOKeepProb: 0.5, L2Reg: 0.0005, BS: 100
+Train log tails:
+Epoch 0.98
+Minibatch loss: 0.108, learning rate: 0.010475
+Minibatch error: 2.0%
+Validation error: 0.5%
+Test error: 2.3%
+Mon Dec 19 20:24:22 2016
+Final test error: 2.6%
+Best test error: 1.8%
+
+Test error stats:
+# test error 1.x: 6
+# test error 2.x: 83
+# test error 3.x: 61
+----------
+

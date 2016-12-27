@@ -1,0 +1,491 @@
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcublas.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcudnn.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcufft.so locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcuda.so.1 locally
+I tensorflow/stream_executor/dso_loader.cc:105] successfully opened CUDA library libcurand.so locally
+I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:900] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:102] Found device 0 with properties: 
+name: GeForce GTX 980M
+major: 5 minor: 2 memoryClockRate (GHz) 1.1265
+pciBusID 0000:01:00.0
+Total memory: 3.99GiB
+Free memory: 3.58GiB
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:126] DMA: 0 
+I tensorflow/core/common_runtime/gpu/gpu_init.cc:136] 0:   Y 
+I tensorflow/core/common_runtime/gpu/gpu_device.cc:755] Creating TensorFlow device (/gpu:0) -> (device: 0, name: GeForce GTX 980M, pci bus id: 0000:01:00.0)
+Base conv depth: 5
+FCL depth: 220
+LR init: 0.013
+LR decay: 0.99
+Keep prob: 0.5
+Reg factor: 0.0005
+Batch size: 75
+Extracting data: data/clipData-train.raw.gz
+Extracting labels: data/clipLabels-train.raw.gz
+Extracting data: data/clipData-test.raw.gz
+Extracting labels: data/clipLabels-test.raw.gz
+Initialized!
+Epoch 0.00
+Minibatch loss: 1.407, learning rate: 0.013000
+Minibatch error: 69.3%
+Validation error: 55.0%
+Test error: 66.7%
+Mon Dec 19 14:08:20 2016
+Epoch 0.52
+Minibatch loss: 1.054, learning rate: 0.013000
+Minibatch error: 52.0%
+Validation error: 55.0%
+Test error: 66.6%
+Mon Dec 19 14:08:21 2016
+Epoch 1.04
+Minibatch loss: 0.865, learning rate: 0.012870
+Minibatch error: 24.0%
+Validation error: 18.0%
+Test error: 20.1%
+Mon Dec 19 14:08:22 2016
+Epoch 1.56
+Minibatch loss: 0.356, learning rate: 0.012870
+Minibatch error: 10.7%
+Validation error: 11.0%
+Test error: 10.1%
+Mon Dec 19 14:08:23 2016
+Epoch 2.08
+Minibatch loss: 0.256, learning rate: 0.012741
+Minibatch error: 6.7%
+Validation error: 7.0%
+Test error: 6.1%
+Mon Dec 19 14:08:24 2016
+Epoch 2.60
+Minibatch loss: 0.189, learning rate: 0.012741
+Minibatch error: 2.7%
+Validation error: 4.0%
+Test error: 5.7%
+Mon Dec 19 14:08:25 2016
+Epoch 3.12
+Minibatch loss: 0.251, learning rate: 0.012614
+Minibatch error: 6.7%
+Validation error: 4.0%
+Test error: 4.3%
+Mon Dec 19 14:08:26 2016
+Epoch 3.65
+Minibatch loss: 0.158, learning rate: 0.012614
+Minibatch error: 2.7%
+Validation error: 1.0%
+Test error: 4.0%
+Mon Dec 19 14:08:27 2016
+Epoch 4.17
+Minibatch loss: 0.098, learning rate: 0.012488
+Minibatch error: 0.0%
+Validation error: 2.0%
+Test error: 1.5%
+Mon Dec 19 14:08:28 2016
+Epoch 4.69
+Minibatch loss: 0.128, learning rate: 0.012488
+Minibatch error: 1.3%
+Validation error: 1.0%
+Test error: 1.8%
+Mon Dec 19 14:08:29 2016
+Epoch 5.21
+Minibatch loss: 0.109, learning rate: 0.012363
+Minibatch error: 0.0%
+Validation error: 1.0%
+Test error: 2.5%
+Mon Dec 19 14:08:30 2016
+Epoch 5.73
+Minibatch loss: 0.109, learning rate: 0.012363
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 5.1%
+Mon Dec 19 14:08:31 2016
+Epoch 6.25
+Minibatch loss: 0.111, learning rate: 0.012239
+Minibatch error: 2.7%
+Validation error: 1.0%
+Test error: 3.5%
+Mon Dec 19 14:08:32 2016
+Epoch 6.77
+Minibatch loss: 0.091, learning rate: 0.012239
+Minibatch error: 0.0%
+Validation error: 1.0%
+Test error: 2.6%
+Mon Dec 19 14:08:33 2016
+Epoch 7.29
+Minibatch loss: 0.100, learning rate: 0.012117
+Minibatch error: 1.3%
+Validation error: 0.0%
+Test error: 3.3%
+Mon Dec 19 14:08:34 2016
+Epoch 7.81
+Minibatch loss: 0.084, learning rate: 0.012117
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.5%
+Mon Dec 19 14:08:35 2016
+Epoch 8.33
+Minibatch loss: 0.110, learning rate: 0.011996
+Minibatch error: 1.3%
+Validation error: 0.0%
+Test error: 3.0%
+Mon Dec 19 14:08:37 2016
+Epoch 8.85
+Minibatch loss: 0.085, learning rate: 0.011996
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 3.2%
+Mon Dec 19 14:08:37 2016
+Epoch 9.38
+Minibatch loss: 0.083, learning rate: 0.011876
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.6%
+Mon Dec 19 14:08:39 2016
+Epoch 9.90
+Minibatch loss: 0.108, learning rate: 0.011876
+Minibatch error: 1.3%
+Validation error: 0.0%
+Test error: 2.0%
+Mon Dec 19 14:08:40 2016
+Epoch 10.42
+Minibatch loss: 0.083, learning rate: 0.011757
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.7%
+Mon Dec 19 14:08:41 2016
+Epoch 10.94
+Minibatch loss: 0.083, learning rate: 0.011757
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 3.5%
+Mon Dec 19 14:08:42 2016
+Epoch 11.46
+Minibatch loss: 0.080, learning rate: 0.011639
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.4%
+Mon Dec 19 14:08:43 2016
+Epoch 11.98
+Minibatch loss: 0.079, learning rate: 0.011639
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:44 2016
+Epoch 12.50
+Minibatch loss: 0.080, learning rate: 0.011523
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:45 2016
+Epoch 13.02
+Minibatch loss: 0.089, learning rate: 0.011408
+Minibatch error: 1.3%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:46 2016
+Epoch 13.54
+Minibatch loss: 0.079, learning rate: 0.011408
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.1%
+Mon Dec 19 14:08:47 2016
+Epoch 14.06
+Minibatch loss: 0.078, learning rate: 0.011294
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.5%
+Mon Dec 19 14:08:48 2016
+Epoch 14.58
+Minibatch loss: 0.092, learning rate: 0.011294
+Minibatch error: 1.3%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:49 2016
+Epoch 15.10
+Minibatch loss: 0.078, learning rate: 0.011181
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.7%
+Mon Dec 19 14:08:50 2016
+Epoch 15.62
+Minibatch loss: 0.077, learning rate: 0.011181
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.6%
+Mon Dec 19 14:08:51 2016
+Epoch 16.15
+Minibatch loss: 0.076, learning rate: 0.011069
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:52 2016
+Epoch 16.67
+Minibatch loss: 0.080, learning rate: 0.011069
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:53 2016
+Epoch 17.19
+Minibatch loss: 0.075, learning rate: 0.010958
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.0%
+Mon Dec 19 14:08:54 2016
+Epoch 17.71
+Minibatch loss: 0.076, learning rate: 0.010958
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.7%
+Mon Dec 19 14:08:55 2016
+Epoch 18.23
+Minibatch loss: 0.075, learning rate: 0.010849
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.1%
+Mon Dec 19 14:08:56 2016
+Epoch 18.75
+Minibatch loss: 0.076, learning rate: 0.010849
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 3.6%
+Mon Dec 19 14:08:57 2016
+Epoch 19.27
+Minibatch loss: 0.075, learning rate: 0.010740
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:08:59 2016
+Epoch 19.79
+Minibatch loss: 0.076, learning rate: 0.010740
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.7%
+Mon Dec 19 14:09:00 2016
+Epoch 20.31
+Minibatch loss: 0.093, learning rate: 0.010633
+Minibatch error: 1.3%
+Validation error: 0.0%
+Test error: 3.1%
+Mon Dec 19 14:09:01 2016
+Epoch 20.83
+Minibatch loss: 0.075, learning rate: 0.010633
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 3.9%
+Mon Dec 19 14:09:02 2016
+Epoch 21.35
+Minibatch loss: 0.072, learning rate: 0.010526
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.5%
+Mon Dec 19 14:09:03 2016
+Epoch 21.88
+Minibatch loss: 0.072, learning rate: 0.010526
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.1%
+Mon Dec 19 14:09:04 2016
+Epoch 22.40
+Minibatch loss: 0.072, learning rate: 0.010421
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.1%
+Mon Dec 19 14:09:05 2016
+Epoch 22.92
+Minibatch loss: 0.071, learning rate: 0.010421
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.2%
+Mon Dec 19 14:09:06 2016
+Epoch 23.44
+Minibatch loss: 0.071, learning rate: 0.010317
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.8%
+Mon Dec 19 14:09:07 2016
+Epoch 23.96
+Minibatch loss: 0.071, learning rate: 0.010317
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.8%
+Mon Dec 19 14:09:08 2016
+Epoch 24.48
+Minibatch loss: 0.070, learning rate: 0.010214
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.5%
+Mon Dec 19 14:09:09 2016
+Epoch 25.00
+Minibatch loss: 0.070, learning rate: 0.010112
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.8%
+Mon Dec 19 14:09:10 2016
+Epoch 25.52
+Minibatch loss: 0.069, learning rate: 0.010112
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.5%
+Mon Dec 19 14:09:11 2016
+Epoch 26.04
+Minibatch loss: 0.070, learning rate: 0.010011
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.7%
+Mon Dec 19 14:09:12 2016
+Epoch 26.56
+Minibatch loss: 0.069, learning rate: 0.010011
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.7%
+Mon Dec 19 14:09:13 2016
+Epoch 27.08
+Minibatch loss: 0.068, learning rate: 0.009910
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.0%
+Mon Dec 19 14:09:14 2016
+Epoch 27.60
+Minibatch loss: 0.068, learning rate: 0.009910
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.8%
+Mon Dec 19 14:09:15 2016
+Epoch 28.12
+Minibatch loss: 0.069, learning rate: 0.009811
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.3%
+Mon Dec 19 14:09:16 2016
+Epoch 28.65
+Minibatch loss: 0.067, learning rate: 0.009811
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:09:17 2016
+Epoch 29.17
+Minibatch loss: 0.067, learning rate: 0.009713
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.2%
+Mon Dec 19 14:09:18 2016
+Epoch 29.69
+Minibatch loss: 0.067, learning rate: 0.009713
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:09:20 2016
+Epoch 30.21
+Minibatch loss: 0.067, learning rate: 0.009616
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.6%
+Mon Dec 19 14:09:21 2016
+Epoch 30.73
+Minibatch loss: 0.066, learning rate: 0.009616
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.1%
+Mon Dec 19 14:09:22 2016
+Epoch 31.25
+Minibatch loss: 0.066, learning rate: 0.009520
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:09:23 2016
+Epoch 31.77
+Minibatch loss: 0.066, learning rate: 0.009520
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.6%
+Mon Dec 19 14:09:24 2016
+Epoch 32.29
+Minibatch loss: 0.065, learning rate: 0.009425
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.2%
+Mon Dec 19 14:09:25 2016
+Epoch 32.81
+Minibatch loss: 0.065, learning rate: 0.009425
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.2%
+Mon Dec 19 14:09:26 2016
+Epoch 33.33
+Minibatch loss: 0.065, learning rate: 0.009330
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.2%
+Mon Dec 19 14:09:27 2016
+Epoch 33.85
+Minibatch loss: 0.065, learning rate: 0.009330
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:09:28 2016
+Epoch 34.38
+Minibatch loss: 0.064, learning rate: 0.009237
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.9%
+Mon Dec 19 14:09:29 2016
+Epoch 34.90
+Minibatch loss: 0.064, learning rate: 0.009237
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.2%
+Mon Dec 19 14:09:30 2016
+Epoch 35.42
+Minibatch loss: 0.063, learning rate: 0.009145
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.7%
+Mon Dec 19 14:09:31 2016
+Epoch 35.94
+Minibatch loss: 0.063, learning rate: 0.009145
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.4%
+Mon Dec 19 14:09:32 2016
+Epoch 36.46
+Minibatch loss: 0.063, learning rate: 0.009053
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.6%
+Mon Dec 19 14:09:33 2016
+Epoch 36.98
+Minibatch loss: 0.063, learning rate: 0.009053
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.4%
+Mon Dec 19 14:09:34 2016
+Epoch 37.50
+Minibatch loss: 0.062, learning rate: 0.008963
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.2%
+Mon Dec 19 14:09:35 2016
+Epoch 38.02
+Minibatch loss: 0.062, learning rate: 0.008873
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.3%
+Mon Dec 19 14:09:36 2016
+Epoch 38.54
+Minibatch loss: 0.062, learning rate: 0.008873
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.8%
+Mon Dec 19 14:09:37 2016
+Epoch 39.06
+Minibatch loss: 0.062, learning rate: 0.008784
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 2.8%
+Mon Dec 19 14:09:38 2016
+Epoch 39.58
+Minibatch loss: 0.061, learning rate: 0.008784
+Minibatch error: 0.0%
+Validation error: 0.0%
+Test error: 1.3%
+Mon Dec 19 14:09:39 2016
+Final test error: 2.8%
+Best test error: 1.1%
