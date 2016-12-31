@@ -14,6 +14,7 @@ import time
 import math
 import os
 import argparse
+from wmmWrapper import *
 
 
 # ================================================================================
@@ -111,6 +112,7 @@ class HandAcceptance:
 # ================================================================================
 pdf = np.empty((PREDICT_HIST_SIZE, 1))
 profileTime = time.time()
+wmm = None
 mainGraph = None
 mainSess = None
 jzGraph = None
@@ -262,72 +264,148 @@ class StateMgr:
     the actual triggered letters forwarded to the Word Model Manager.
     Every frame, the smoothed, merged predictions are processed.  Each letter (plus the sentinel) is handled
     independently.
-    When a letter probability exceeds the letter's current threshold, this moves that letter into a hysteresis phase in
-    which we wait for some maximum number of frames for that letter's probability to maximize.  This provides time for
-    the user to complete proper formation of the letter.  The maximum probability is then forwarded to the Word Model
+    When our confidence in a letter exceeds its current threshold, this moves that letter into a hysteresis phase in
+    which we wait for some maximum number of frames for that letter's confidence to maximize.  This provides time for
+    the user to complete proper formation of the letter.  The maximum confidence is then forwarded to the Word Model
     Manager.
-    Each triggered letter also causes the letter's threshold to increase to a maximum value.  The threshold then follows
-    a simple linear schedule to return to the default value.  This helps avoid duplicate triggers in the case that a
-    letter is held longer than the brief hysteresis phase.  The threshold schedule is currently tuned informally based
-    on experimentation.  A more formal treatment, perhaps involving labeled video clips and an evolutionary algorithm,
-    would likely improve performance.
+    Each triggered letter also causes the letter's threshold to increase to a maximum value.  Once there is some
+    indication the user is transitioning away from the letter (as detected by change in loss), the threshold follows a
+    simple linear schedule to return to the default value.  This helps avoid duplicate triggers.
+    Note that the confidence in a letter is scaled by (1.0 - loss) to factor in "noise".
+    We also keep track of the X position of the loose bounding box so we can provide an estimated probability that the 
+    user intended a double letter.
+    Many of the "hyper-parameters" involved in the State Manager and Word Model Manager are currently tuned informally
+    based on experimentation.  A more formal treatment, perhaps involving labeled video clips and an evolutionary
+    algorithm, would improve accuracy.
     """
     SENTINEL_INDEX = 26
-    DEF_THRES = 0.1
-    MAX_THRES = 3.0
-    THRES_STEP = 1.0 / 12
-    HYSTERESIS_DUR = 12
+    SENTINEL_THRES = 12  # Number of consecutive sentinel detections to trigger finalization.
+    DEF_THRES = 0.5  # Baseline threshold for triggering letter hysteresis.
+    MAX_THRES = 1.5  # Maximum threshold to reduce sensitivity for a duration after letter triggered.
+    THRES_STEP = 1.0 / 10  # Threshold step to reduce per frame while restoring baseline threshold.
+    HYSTERESIS_DUR = 10  # Duration of hysteresis phase in frames.
+    LOSS_THRES = 0.001  # Loss delta threshold; loss difference exceeding threshold indicates transition.
+
+    # Constants controlling calculation of probability that letter is doubled, e.g.: to vs. too.
+    # Thresholds are fraction of loose bounding box width.  The X position of the bounding box is tracked and these
+    # thresholds are used to convert that "x-diff" to a probability in the range [0.1 .. 0.9].
+    DOUBLE_PROB_MIN_THRES = 0.05
+    DOUBLE_PROB_MAX_THRES = 0.20
+    DOUBLE_PROB_THRES_RANGE = DOUBLE_PROB_MAX_THRES - DOUBLE_PROB_MIN_THRES
+
+    class State:
+        """
+        Processing state enumeration.
+        """
+        PS_INIT = 0         # First sentinel not received
+        PS_PROCESSING = 1   # Normal processing state
+        PS_WAITING = 2      # Last phrase finalized, waiting for first new letter of next phrase
+
+        def __init__(self):
+            pass
 
     def __init__(self):
         """
         Initialize instance.
         """
-        self._ready = False
+        self._sentinel_count = 0
         self._thres = [StateMgr.DEF_THRES] * NUM_SYMBOLS
         self._hysteresis = [0] * NUM_SYMBOLS
-        self._max_prob = [0.0] * NUM_SYMBOLS
+        self._max_conf = [0.0] * NUM_SYMBOLS
         self._x_hist = [0] * StateMgr.HYSTERESIS_DUR
         self._x_hist_index = 0
+        self._state = StateMgr.State.PS_INIT
+        self._last_time = time.time()
+        self._loss = [0.0] * NUM_SYMBOLS
+        self._suspend = [False] * NUM_SYMBOLS
 
     def process_predictions(self, predictions):
+        """
+        Process latest predictions to update state and interface with the Word Model Manager.
+        :param predictions: smoothed, merged predictions from the CNNs
+        """
+
         # Update X-pos history.
         self.update_x_hist()
 
-        # Wait for first sentinel before processing triggers.
+        # Debounce processing for sentinel symbol.
+        sentinel_active = False
         max_index = np.argmax(predictions)
-        if not self._ready:
-            if max_index == StateMgr.SENTINEL_INDEX:
-                self._ready = True
+        if max_index == StateMgr.SENTINEL_INDEX:
+            self._sentinel_count += 1
+            if self._sentinel_count >= StateMgr.SENTINEL_THRES:
+                sentinel_active = True
+                
+                # Sentinel detected, finalize and move to waiting state if processing.
+                if self._state == StateMgr.State.PS_PROCESSING:
+                    self._state = StateMgr.State.PS_WAITING
+                    wmm.finalize_prediction()
+                    print('Final:', wmm.get_best_prediction())
         else:
+            self._sentinel_count = 0
+            
+            # Sentinel not detected, reset Word Model Manager and move to processing state if waiting.
+            if self._state == StateMgr.State.PS_WAITING:
+                self._state = StateMgr.State.PS_PROCESSING
+                wmm.reset()
+
+        # Wait for debounced sentinel before processing triggers.
+        if self._state == StateMgr.State.PS_INIT:
+            if sentinel_active:
+                self._state = StateMgr.State.PS_PROCESSING
+        else:
+            # First calculate loss.
+            max_value = np.amax(predictions)
+            loss = np.sum(predictions) - max_value + (1.0 - max_value)
+            # print('LOSS=', loss)
+
             # Process each letter independently.
             for i in range(0, len(predictions)):
-                if self._thres[i] > StateMgr.DEF_THRES:
-                    # Follow linear schedule for returning to baseline threshold.
-                    self._thres[i] -= StateMgr.THRES_STEP
-                    if self._thres[i] < StateMgr.DEF_THRES:
-                        self._thres[i] = StateMgr.DEF_THRES
-
                 if self._hysteresis[i] > 0:
                     # In hysteresis phase.
                     self._hysteresis[i] -= 1
 
-                    # Update maximum probability.
-                    if self._max_prob[i] < predictions[i]:
-                        self._max_prob[i] = predictions[i]
+                    # Update maximum confidence and update tracked loss.
+                    new_conf = predictions[i] * (1.0 - loss)
+                    if self._max_conf[i] < new_conf:
+                        self._max_conf[i] = new_conf
+                        self._loss[i] = loss
 
                     if self._hysteresis[i] == 0:
                         # Hysteresis completed.
+                        # Get maximum X diff and update Word Model Manager.
+                        x_diff = self.get_x_diff()
                         if i < 26:
-                            ascii_val = i + 65  # Capital letter
+                            ascii_val = i + 65  # Display capital letter
+                            wmm.add_letter_prediction(i, self._max_conf[i], self.convert_to_double_prob(x_diff))
+                            print('Best:', wmm.get_best_prediction())
                         else:
-                            ascii_val = 42  # *
-                        print(chr(ascii_val), "TRIGGERED - Prob =", self._max_prob[i], "X-diff =", self.get_x_diff())
+                            ascii_val = 42  # Display "*" for sentinel
+
+                        # Display diagnostic info.
+                        print(chr(ascii_val), " - Conf =", round(self._max_conf[i], 3), "X-diff =", round(x_diff, 3),
+                              "Double prob =", round(self.convert_to_double_prob(x_diff), 3),
+                              "Delay =", int((time.time() - self._last_time) * 1000), "Loss =", round(self._loss[i], 3))
+                        self._last_time = time.time()
                 elif predictions[i] > self._thres[i]:
                     # Letter 'i' has exceeded probability threshold, it will be triggered after hysteresis.
-                    # Increase threshold, initialize hysteresis counter, and establish baseline probability.
+                    # Increase threshold, initialize hysteresis counter, establish baseline parameters, etc...
                     self._thres[i] = StateMgr.MAX_THRES
                     self._hysteresis[i] = StateMgr.HYSTERESIS_DUR
-                    self._max_prob[i] = predictions[i]
+                    self._max_conf[i] = predictions[i] * (1.0 - loss)
+                    self._loss[i] = loss
+                    self._suspend[i] = True
+                elif self._thres[i] > StateMgr.DEF_THRES:
+                    # Don't begin returning to baseline threshold until loss reflects some movement away from current
+                    # letter.
+                    if self._suspend[i]:
+                        if abs(loss - self._loss[i]) >= StateMgr.LOSS_THRES:
+                            self._suspend[i] = False
+                    else:
+                        # Follow linear schedule for returning to baseline threshold.
+                        self._thres[i] -= StateMgr.THRES_STEP
+                        if self._thres[i] < StateMgr.DEF_THRES:
+                            self._thres[i] = StateMgr.DEF_THRES
 
     def update_x_hist(self):
         """
@@ -343,6 +421,15 @@ class StateMgr:
         """
         oldest_index = (self._x_hist_index + 1) % StateMgr.HYSTERESIS_DUR
         return (max(self._x_hist) - self._x_hist[oldest_index]) / looseBound[2]
+
+    @staticmethod
+    def convert_to_double_prob(x_diff):
+        if x_diff < StateMgr.DOUBLE_PROB_MIN_THRES:
+            return 0.1
+        elif x_diff < StateMgr.DOUBLE_PROB_MAX_THRES:
+            return 0.1 + (0.8 * ((x_diff - StateMgr.DOUBLE_PROB_MIN_THRES) / StateMgr.DOUBLE_PROB_THRES_RANGE))
+        else:
+            return 0.9
 
 
 # ================================================================================
@@ -411,6 +498,7 @@ def do_predict(img):
     global lastTime
     global rollingPredictions
     global stateMgr
+    global wmm
 
     # Run CNNs on features to get predictions.
     main_predictions = get_main_predictions()
@@ -463,8 +551,11 @@ def do_predict(img):
             cv2.putText(img, chr(ascii_val), (20 + i * 22, 470), cv2.FONT_HERSHEY_SIMPLEX, curr_predictions[i] * 1.5,
                         (255, 50, 50), 3)
 
-    # Forward latest prediction on to the State Manager.
+    # Forward latest predictions on to the State Manager.
     stateMgr.process_predictions(curr_predictions)
+
+    cv2.rectangle(img, (5, 395), (635, 435), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.putText(img, wmm.get_best_prediction(), (20, 430), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 50, 50), 3)
 
 
 def do_tuning():
@@ -1219,6 +1310,7 @@ def process_image(img):
 
 def main():
     global pdf
+    global wmm
     global devName
     global stateMgr
 
@@ -1228,6 +1320,12 @@ def main():
     # Build probability density function to smooth rolling J/Z predictions.
     for i in range(0, PREDICT_HIST_SIZE):
         pdf[i] = norm_pdf(i, 3.5, 1.5)
+
+    print('Initializing Word Model Manager...')
+    wmm = WordModelMgr()
+    if not wmm.initialize():
+        print('ERROR: WMM initialization failed.')
+        return
 
     # At the time of this development effort, Tensorflow does not easily support loading a model from file and restoring
     # saved parameters.  Instead, rebuilding both CNN graphs manually and restoring from saved checkpoints.
@@ -1281,6 +1379,8 @@ def main():
             absolute_exposure -= 25
             if absolute_exposure < 100:
                 absolute_exposure = 100
+        elif key == ord('1'):
+            wmm.dump_candidates()
 
         # Process manual exposure updates.
         if update_exposure:

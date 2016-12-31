@@ -21,7 +21,7 @@
 # These files can be generated using the FSI Data Collection Tool and *lots* of
 # time...
 #
-# Ignore everything in this directory
-*
+# Ignore the gzipped raw data files in this directory
+*.raw.gz
 # Except this file
 !.gitignore
