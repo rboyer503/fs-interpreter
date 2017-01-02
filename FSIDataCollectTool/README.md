@@ -89,7 +89,7 @@ Capture a snapshot or burst of snapshots of the letter of the corresponding key 
 
 [Generate data and label files]
 If in normal mode, process all data samples under the .\data directory to generate two raw files: data.raw and labels.raw.  For J/Z mode, process all clip samples under the .\clipData directory to generate two raw files: clipData.raw and clipLabels.raw.  The data file stores the actual features while the labels file stores the corresponding labels.  Directory processing is recursive, so unlimited collections of samples can be stored under .\data or .\clipData.  Typically, a user will collect data for all letters in a session and then move the samples from .\TempData to a sub-directory under .\data and/or .\clipData beforing generating the raw data and label files.
-Note that this process will create NUM_SAMPLES_PER_CAPTURE (see Globals.h) samples in the output raw files per each sample.  (This involves some typical "data multiplication" processes such as randomly adjusting the scale, angle, and constrast.)
+Note that this process will create NUM_SAMPLES_PER_CAPTURE (see Globals.h) samples in the output raw files per each sample.  (This involves some typical "data multiplication" processes such as randomly adjusting the scale, angle, and contrast.)
 
 [Load data file]
 If in normal mode, open data.raw for display/navigation in the Data Collection Viewer window.  For J/Z mode, open clipData.raw for similar purposes.  The corresponding file must exist in the local directory for proper behavior.  Use the </>, [/], {/} keys to navigate after loading the file.
