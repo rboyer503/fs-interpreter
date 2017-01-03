@@ -41,7 +41,7 @@ Requirements/Dependencies
   - I use Ubuntu 14.04 LTS.
   - 32-bit support may be possible, but there may be some complications with TensorFlow and its build tool, Bazel.
 - Python 2.7
-  - Adapting to Python 3.3 should be straight-forward to the best of my knowledge, but this is my first foray into Python scripting.
+  - Adapting to Python 3.3 should be straight-forward to the best of my knowledge.
 - TensorFlow 0.8
   - Exclusively using Python API.
   - No testing has yet been completed on newer releases.
@@ -93,7 +93,7 @@ The fingerspelling interpreter uses two separate models, both typical Convolutio
 Same as above, except using 3x3 kernels.
 
 ### Model Inputs
-Input to the models is the "master quality matrix" calculated as part of the hand location, tracking, and feature extraction pipeline decribed in the top-level README.  This master quality matrix is a small, grayscale image with pixel intensity proportional to the estimated probability that the pixel is part of the hand.  For the main CNN, the input to the model is a single 80x80 matrix.  For the J/Z CNN, the input to the model is an array of 8 64x64 matrices providing a short video clip of the J or Z gesture.
+Input to the models is the "master quality matrix" calculated as part of the hand location, tracking, and feature extraction pipeline described in the top-level README.  This master quality matrix is a small, grayscale image with pixel intensity proportional to the estimated probability that the pixel is part of the hand.  For the main CNN, the input to the model is a single 80x80 matrix.  For the J/Z CNN, the input to the model is an array of 8 64x64 matrices providing a short video clip of the J or Z gesture.
 
 For training, the input matrices are extracted from gzipped files containing the raw data.  The raw files can be generated using the FSI Data Collection Tool.  Data and corresponding labels are stored in separate files; for example, the first set of data and labels for the main CNN are stored in the files `data1.raw.gz` and `labels1.raw.gz` respectively.  Separate data and label files exist for the test sets, e.g.: `data-test.raw.gz` and `labels-test.raw.gz`.
 
@@ -102,11 +102,9 @@ Note that no data multiplication techniques are used.  Data multiplication is ha
 Input samples are converted to floating point, scaled to the range -0.5 to 0.5.
 
 ### Model Training
-The models are trained using mini-batch gradient descent applying the momentum optimization algorithm with a 0.9 momentum term.  The learning rate decays once per epoch, following an exponential schedule.  The objective function for the models is the sum of the cross entropy loss combined with weight decay (L2 regularization) of the parameters for the fully-connected layers.  During training, dropout is also applied.
+The models are trained using mini-batch gradient descent applying the momentum optimization algorithm with a 0.9 momentum term.  The learning rate decays once per epoch, following an exponential schedule.  The objective function for the models is the sum of the cross entropy loss combined with weight decay (L2 regularization) of the parameters for the fully-connected layers.  During training, dropout is also applied.  Data is reshuffled after each epoch.  I experimented with batch normalization as well, but this was eventually removed from the model since the expected improvements never materialized.
 
-K-fold cross-validation is used with data reshuffling applied after each epoch.
-
-I experimented with batch normalization as well, but this was eventually removed from the model since the expected improvements never materialized.
+Note that the current implementation is not following best practices with respect to proper validation and testing.  The held-out test data has been extensively used for tuning of hyperparameters and the "validation data" is simply a sample of the training data which is randomly re-selected for each epoch.  Proper segregation of training, validation, and test samples should be implemented going forward.
 
 ### Hyperparameter Optimization
 Quite a bit of time was applied towards optimizing hyperparameters.  The approach taken was a simple grid search.  Separate "grids" were searched separately, each investigating a handful of tightly related parameters to mitigate the "curse of dimensionality".  Some fundamental hyperparameters and the core model architecture were determined prior to some cleanup activity, so the training scripts parameterize only a subset of the hyperparameters.  These include:

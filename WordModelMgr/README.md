@@ -27,10 +27,7 @@ The directory structure is as follows:
 
 Building
 --------
-To build the shared library:
-    make release
-or
-    make debug
+To build the shared library, run `make release` or `make debug`.
 
 The shared library will be placed in fs-interpreter/WordModelMgr/lib.  This must be copied to fs-interpreter/FSInterpreter/lib for use by FSInterpreter.py.
 
@@ -55,9 +52,9 @@ WordModelMgr class interface
 - Load dictionary and prepare baseline state.
 
 ### add_letter_prediction(self, letter_index, confidence, double_prob)
-   letter_index - 0="A", ..., 25="Z", 26=sentinel
-   confidence - the confidence in the prediction from 0.0 to 1.0
-   double_prob - probability that letter is a double (e.g.: the oo in too)
+    letter_index - 0="A", ..., 25="Z", 26=sentinel
+    confidence - the confidence in the prediction from 0.0 to 1.0
+    double_prob - probability that letter is a double (e.g.: the oo in too)
 - Build new phrase candidates based on specified letter prediction.
 
 ### finalize_prediction(self)
