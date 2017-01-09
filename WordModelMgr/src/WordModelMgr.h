@@ -81,6 +81,11 @@ public:
 		return m_masterProb;
 	}
 
+	double GetTargetProbability() const
+	{
+		return m_targetProb;
+	}
+
 	std::string & GetPhrase()
 	{
 		return m_phrase;

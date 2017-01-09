@@ -14,7 +14,9 @@ import time
 import math
 import os
 import argparse
+
 from wmmWrapper import *
+from phraseModelMgr import *
 
 
 # ================================================================================
@@ -29,6 +31,7 @@ BLOWOUT_TEST_FREQ = 10
 BLOWOUT_THRES = 100
 PREDICT_HIST_SIZE = 8
 NUM_SYMBOLS = 27
+NUM_TOP_PHRASES = 5
 
 # Main CNN-specific constants:
 # Update if CNN hyper-parameters or data sets are modified.
@@ -113,6 +116,7 @@ class HandAcceptance:
 pdf = np.empty((PREDICT_HIST_SIZE, 1))
 profileTime = time.time()
 wmm = None
+pmm = None
 mainGraph = None
 mainSess = None
 jzGraph = None
@@ -324,6 +328,8 @@ class StateMgr:
         Process latest predictions to update state and interface with the Word Model Manager.
         :param predictions: smoothed, merged predictions from the CNNs
         """
+        global wmm
+        global pmm
 
         # Update X-pos history.
         self.update_x_hist()
@@ -340,14 +346,24 @@ class StateMgr:
                 if self._state == StateMgr.State.PS_PROCESSING:
                     self._state = StateMgr.State.PS_WAITING
                     wmm.finalize_prediction()
-                    print('Final:', wmm.get_best_prediction())
+                    print('WMM Final:', wmm.get_best_prediction())
+
+                    # Send top phrases to PMM.
+                    out_prob = ctypes.c_double()
+                    for i in range(NUM_TOP_PHRASES):
+                        curr_phrase = wmm.get_next_prediction(ctypes.byref(out_prob))
+                        if not curr_phrase:
+                            break
+                        pmm.add_phrase(curr_phrase, out_prob.value)
+                    print('PMM Final:', pmm.get_best_phrase()[0])
         else:
             self._sentinel_count = 0
             
-            # Sentinel not detected, reset Word Model Manager and move to processing state if waiting.
+            # Sentinel not detected, reset Word/Phrase Model Managers and move to processing state if waiting.
             if self._state == StateMgr.State.PS_WAITING:
                 self._state = StateMgr.State.PS_PROCESSING
                 wmm.reset()
+                pmm.reset()
 
         # Wait for debounced sentinel before processing triggers.
         if self._state == StateMgr.State.PS_INIT:
@@ -388,13 +404,14 @@ class StateMgr:
                               "Delay =", int((time.time() - self._last_time) * 1000), "Loss =", round(self._loss[i], 3))
                         self._last_time = time.time()
                 elif predictions[i] > self._thres[i]:
-                    # Letter 'i' has exceeded probability threshold, it will be triggered after hysteresis.
-                    # Increase threshold, initialize hysteresis counter, establish baseline parameters, etc...
-                    self._thres[i] = StateMgr.MAX_THRES
-                    self._hysteresis[i] = StateMgr.HYSTERESIS_DUR
-                    self._max_conf[i] = predictions[i] * (1.0 - loss)
-                    self._loss[i] = loss
-                    self._suspend[i] = True
+                    if self._state == StateMgr.State.PS_PROCESSING:
+                        # Letter 'i' has exceeded probability threshold, it will be triggered after hysteresis.
+                        # Increase threshold, initialize hysteresis counter, establish baseline parameters, etc...
+                        self._thres[i] = StateMgr.MAX_THRES
+                        self._hysteresis[i] = StateMgr.HYSTERESIS_DUR
+                        self._max_conf[i] = predictions[i] * (1.0 - loss)
+                        self._loss[i] = loss
+                        self._suspend[i] = True
                 elif self._thres[i] > StateMgr.DEF_THRES:
                     # Don't begin returning to baseline threshold until loss reflects some movement away from current
                     # letter.
@@ -424,6 +441,11 @@ class StateMgr:
 
     @staticmethod
     def convert_to_double_prob(x_diff):
+        """
+        Calculate the estimated probability the current letter is a double based on X position diff.
+        :param x_diff: maximum X position difference since start of hysteresis phase
+        :return: estimated probability of double letter (e.g.: "too" instead of "to")
+        """
         if x_diff < StateMgr.DOUBLE_PROB_MIN_THRES:
             return 0.1
         elif x_diff < StateMgr.DOUBLE_PROB_MAX_THRES:
@@ -499,6 +521,7 @@ def do_predict(img):
     global rollingPredictions
     global stateMgr
     global wmm
+    global pmm
 
     # Run CNNs on features to get predictions.
     main_predictions = get_main_predictions()
@@ -541,21 +564,29 @@ def do_predict(img):
     # Provide display for predictions.
     # For any predictions with >= 0.1 probability, we render the letter, scaling the text based on the probability.
     # (The greater the probability, the larger the letter is rendered.)
-    cv2.rectangle(img, (5, 435), (635, 475), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.rectangle(img, (5, 375), (635, 415), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.rectangle(img, (5, 375), (635, 415), (255, 255, 255))
     for i in range(0, len(curr_predictions)):
         if i < 26:
             ascii_val = i + 65  # Capital letter
         else:
             ascii_val = 42  # *
         if curr_predictions[i] >= 0.1:
-            cv2.putText(img, chr(ascii_val), (20 + i * 22, 470), cv2.FONT_HERSHEY_SIMPLEX, curr_predictions[i] * 1.5,
+            cv2.putText(img, chr(ascii_val), (20 + i * 22, 410), cv2.FONT_HERSHEY_SIMPLEX, curr_predictions[i] * 1.5,
                         (255, 50, 50), 3)
 
     # Forward latest predictions on to the State Manager.
     stateMgr.process_predictions(curr_predictions)
 
-    cv2.rectangle(img, (5, 395), (635, 435), (0, 0, 0), cv2.cv.CV_FILLED)
-    cv2.putText(img, wmm.get_best_prediction(), (20, 430), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 50, 50), 3)
+    # Provide display for latest Word Model Manager prediction.
+    cv2.rectangle(img, (5, 415), (635, 445), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.rectangle(img, (5, 415), (635, 445), (255, 255, 255))
+    cv2.putText(img, 'WMM: ' + wmm.get_best_prediction(), (20, 438), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 50, 50), 2)
+
+    # Provide display for latest Phrase Model Manager prediction.
+    cv2.rectangle(img, (5, 445), (635, 475), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.rectangle(img, (5, 445), (635, 475), (255, 255, 255))
+    cv2.putText(img, 'PMM: ' + pmm.get_best_phrase()[0], (20, 468), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 50, 50), 2)
 
 
 def do_tuning():
@@ -1311,6 +1342,7 @@ def process_image(img):
 def main():
     global pdf
     global wmm
+    global pmm
     global devName
     global stateMgr
 
@@ -1326,6 +1358,9 @@ def main():
     if not wmm.initialize():
         print('ERROR: WMM initialization failed.')
         return
+
+    print('Initializing Phrase Model Manager...')
+    pmm = PhraseModelMgr()
 
     # At the time of this development effort, Tensorflow does not easily support loading a model from file and restoring
     # saved parameters.  Instead, rebuilding both CNN graphs manually and restoring from saved checkpoints.
@@ -1381,6 +1416,8 @@ def main():
                 absolute_exposure = 100
         elif key == ord('1'):
             wmm.dump_candidates()
+        elif key == ord('2'):
+            pmm.dump_phrases()
 
         # Process manual exposure updates.
         if update_exposure:

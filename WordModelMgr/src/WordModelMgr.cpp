@@ -210,7 +210,7 @@ const char * WordModelMgr::GetBestPrediction()
 {
 	// Return first phrase candidate - vector should already be sorted.
 	if (m_candidates.empty())
-		return NULL;
+		return "";
 	else
 		return m_candidates[0]->GetPhrase().c_str();
 }
@@ -222,7 +222,7 @@ const char * WordModelMgr::GetNextPrediction(double * prob)
 	const char * ret = NULL;
 	if ( (m_currIndex < static_cast<int>(m_candidates.size())) && (m_currIndex != -1) )
 	{
-		*prob = m_candidates[m_currIndex]->GetProbability();
+		*prob = m_candidates[m_currIndex]->GetTargetProbability();
 		ret = m_candidates[m_currIndex]->GetPhrase().c_str();
 		m_currIndex++;
 	}
