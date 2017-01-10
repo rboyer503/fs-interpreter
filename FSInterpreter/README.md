@@ -75,7 +75,7 @@ The current state is displayed at the top of the main window.  Once "Finding han
 
 Once "Tracking hand..." is displayed, a diagnostic display will reflect the output of the smoothed, merged CNN predictions for the current symbol; letters with a probability exceeding a minimum threshold will be rendered as capital letters with the font size scaled by the probability.  So, for example, when you make the "B" symbol, the diagnostic display should show a large "B" character and possibly some other very small characters resulting from imperfect classification.
 
-No phrase interpretation will begin until the first sentinel symbol.  To begin hold, the sentinel symbol (open hand facing forward with fingers spread).  Then fingerspell a short phrase, ending with the sentinel symbol.  The lower part of the diagnostic display will report the output of the Word Model Manager and Phrase Model Manager (prefixed by "WMM:" and "PMM:" respectively).  The Word Model Manager output is reported on-the-fly, finalizing the prediction once the sentinel symbol is received.  The final sentinel also triggers the Phrase Model Manager processing; a small number of the best phrases returned by the Word Model Manager are reevaluated based on their perplexity.
+No phrase interpretation will begin until the first sentinel symbol.  To begin, hold the sentinel symbol (open hand facing forward with fingers spread).  Then fingerspell a short phrase, ending with the sentinel symbol.  The lower part of the diagnostic display will report the output of the Word Model Manager and Phrase Model Manager (prefixed by "WMM:" and "PMM:" respectively).  The Word Model Manager output is reported on-the-fly, finalizing the prediction once the sentinel symbol is received.  The final sentinel also triggers the Phrase Model Manager processing; a small number of the best phrases returned by the Word Model Manager are reevaluated based on their perplexity.
 
 
 Convolutional Neural Network Models
@@ -129,7 +129,7 @@ Quite a bit of time was applied towards optimizing hyperparameters.  The approac
 
 Phrase Model Manager
 --------------------
-This component is responsible for evaluating the relative perplexity of phrases returned by the Word Model Manager.  The intention of the Phrase Model Manager is to improve the overall robustness of the fingerspelling interpretation by providing feedback from the a higher level of abstraction.  A Recurrent Neural Network LSTM model trained on data from the Penn Treebank corpus is used to evaluate perplexity, a heuristic estimating how unlikely a given sequence of words is.  As an example, suppose the Word Model Manager returns the following two phrase candidates:
+This component is responsible for evaluating the relative perplexity of phrases returned by the Word Model Manager.  The intention of the Phrase Model Manager is to improve the overall robustness of the fingerspelling interpretation by providing feedback from a higher level of abstraction.  A Recurrent Neural Network LSTM model trained on data from the Penn Treebank corpus is used to evaluate perplexity, a heuristic estimating how unlikely a given sequence of words is.  As an example, suppose the Word Model Manager returns the following two phrase candidates:
 - MY NAME IS ROB
 - MYNA ME IS ROB
 
