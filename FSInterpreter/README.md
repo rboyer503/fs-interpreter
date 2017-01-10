@@ -8,7 +8,10 @@ This is the core Fingerspelling Interpreter, consisting of several Python script
 The directory structure is as follows:
 - fs-interpreter/FSInterpreter
   - data
-    - This directory contains the raw, gzipped data and label files generated from the FSI Data Collection Tool as well as the SOWPODS dictionary used by the Word Model Manager for word validation.
+    - This directory contains various files including:
+      - The raw, gzipped data and label files generated from the FSI Data Collection Tool
+      - The SOWPODS dictionary used by the Word Model Manager for word validation.
+      - The training, validation, and test data files from the Penn Treebank corpus for the Phrase Model Manager.
   - lib
     - This directory contains the Word Model Manager shared library, libwordmodelmgr.so.
   - model
@@ -20,6 +23,8 @@ The directory structure is as follows:
       - logs
         - This directory contains backed up log files from training sessions of the main CNN model.
       - This directory contains the official model parameters for the main CNN model (train-vars-best-main) and also houses temporary files and logs during main CNN model training.
+    - pmm-rnn
+      - This directory contains the official model parameters for the LSTM RNN model used for the Phrase Model Manager.
     - This directory contains the .xml classifier file for the closed fist Haar classifier used by the cascade classifier for initial hand location (aHand.xml).
   - sounds
     - This directory contains any sound files (beep.wav).
@@ -27,6 +32,10 @@ The directory structure is as follows:
     - FSInterpreter.py - The core script for hand tracking and fingerspelling interpretation.
     - TrainJzCNN.py - The script for running training sessions to optimize model parameters for the J/Z CNN model.
     - TrainMainCNN.py - The script for running training sessions to optimize model parameters for the main CNN model.
+    - TrainPMMRNN.py - The script for running training sessions to optimize model parameters for the Phrase Model Manager's LSTM RNN.
+    - phraseModelMgr.py - Provides Python class, PhraseModelMgr, for evaluating the perplexity of proposed phrases.
+    - pmmTest.py - A simple test harness for the Phrase Model Manager.
+    - reader.py - Provides utility functions for parsing Penn Treebank text files.
     - wmmWrapper.py - Provides Python wrapper class, WordModelMgr, for interfacing with the Word Model Manager shared library.
     - do_train_jz_multi.sh - Shell script to help automate hyper-parameter optimization of the J/Z CNN model.
     - do_train_main.sh - Shell script to loop through several training sessions of the main CNN model.
@@ -47,7 +56,7 @@ Requirements/Dependencies
   - No testing has yet been completed on newer releases.
 - OpenCV 2.4.11 (Core, HighGUI, ImgProc, and ObjDetect)
 
-The Fingerspelling Interpreter utilizes many computationally expensive machine vision and learning algorithms that can greatly benefit from GPU acceleration.  To achieve the optimal frame rate while running FSInterpreter.py and to reduce CNN training session times, it is strongly recommended to leverage CUDA and the cuDNN on a machine with a suitable GPU and a 64-bit Linux OS.  I use an ASUS G751JY laptop with an NVIDIA GeForce GTX 980M (Maxwell architecture) with the following additional dependencies:
+The Fingerspelling Interpreter utilizes many computationally expensive machine vision and learning algorithms that can greatly benefit from GPU acceleration.  To achieve the optimal frame rate while running FSInterpreter.py and to reduce CNN/RNN training session times, it is strongly recommended to leverage CUDA and the cuDNN on a machine with a suitable GPU and a 64-bit Linux OS.  I use an ASUS G751JY laptop with an NVIDIA GeForce GTX 980M (Maxwell architecture) with the following additional dependencies:
 - CUDA 7.5
 - cuDNN 4.0
 
@@ -66,12 +75,12 @@ The current state is displayed at the top of the main window.  Once "Finding han
 
 Once "Tracking hand..." is displayed, a diagnostic display will reflect the output of the smoothed, merged CNN predictions for the current symbol; letters with a probability exceeding a minimum threshold will be rendered as capital letters with the font size scaled by the probability.  So, for example, when you make the "B" symbol, the diagnostic display should show a large "B" character and possibly some other very small characters resulting from imperfect classification.
 
-No phrase interpretation will begin until the first sentinel symbol.  To begin hold the sentinel symbol (open hand facing forward with fingers spread).  Then fingerspell a short phrase, ending with the sentinel symbol.  The second diagnostic display (just above the aforementioned one) will report its most probable phrase candidate on-the-fly, finalizing the prediction once the sentinel symbol is received.
+No phrase interpretation will begin until the first sentinel symbol.  To begin hold, the sentinel symbol (open hand facing forward with fingers spread).  Then fingerspell a short phrase, ending with the sentinel symbol.  The lower part of the diagnostic display will report the output of the Word Model Manager and Phrase Model Manager (prefixed by "WMM:" and "PMM:" respectively).  The Word Model Manager output is reported on-the-fly, finalizing the prediction once the sentinel symbol is received.  The final sentinel also triggers the Phrase Model Manager processing; a small number of the best phrases returned by the Word Model Manager are reevaluated based on their perplexity.
 
 
-Neural Network Models
----------------------
-The fingerspelling interpreter uses two separate models, both typical Convolutional Neural Network architectures.  The "main" CNN model is used for interpretation of all letters that don't involve motion, including the sentinel symbol.  The "J/Z" CNN model covers the remaining two letters, J and Z, which involve motion.  The models have the same essential architecture as outlined below.
+Convolutional Neural Network Models
+-----------------------------------
+The fingerspelling interpreter uses two separate CNN models, both typical CNN architectures.  The "main" CNN model is used for interpretation of all letters that don't involve motion, including the sentinel symbol.  The "J/Z" CNN model covers the remaining two letters, J and Z, which involve motion.  The models have the same essential architecture as outlined below.
 
 ### Main CNN Layers
 - Conv layer 1
@@ -92,7 +101,7 @@ The fingerspelling interpreter uses two separate models, both typical Convolutio
 ### J/Z CNN Layers
 Same as above, except using 3x3 kernels.
 
-### Model Inputs
+### CNN Model Inputs
 Input to the models is the "master quality matrix" calculated as part of the hand location, tracking, and feature extraction pipeline described in the top-level README.  This master quality matrix is a small, grayscale image with pixel intensity proportional to the estimated probability that the pixel is part of the hand.  For the main CNN, the input to the model is a single 80x80 matrix.  For the J/Z CNN, the input to the model is an array of 8 64x64 matrices providing a short video clip of the J or Z gesture.
 
 For training, the input matrices are extracted from gzipped files containing the raw data.  The raw files can be generated using the FSI Data Collection Tool.  Data and corresponding labels are stored in separate files; for example, the first set of data and labels for the main CNN are stored in the files `data1.raw.gz` and `labels1.raw.gz` respectively.  Separate data and label files exist for the test sets, e.g.: `data-test.raw.gz` and `labels-test.raw.gz`.
@@ -101,7 +110,7 @@ Note that no data multiplication techniques are used.  Data multiplication is ha
 
 Input samples are converted to floating point, scaled to the range -0.5 to 0.5.
 
-### Model Training
+### CNN Model Training
 The models are trained using mini-batch gradient descent applying the momentum optimization algorithm with a 0.9 momentum term.  The learning rate decays once per epoch, following an exponential schedule.  The objective function for the models is the sum of the cross entropy loss combined with weight decay (L2 regularization) of the parameters for the fully-connected layers.  During training, dropout is also applied.  Data is reshuffled after each epoch.  I experimented with batch normalization as well, but this was eventually removed from the model since the expected improvements never materialized.
 
 Note that the current implementation is not following best practices with respect to proper validation and testing.  The held-out test data has been extensively used for tuning of hyperparameters and the "validation data" is simply a sample of the training data which is randomly re-selected for each epoch.  Proper segregation of training, validation, and test samples should be implemented going forward.
@@ -116,3 +125,17 @@ Quite a bit of time was applied towards optimizing hyperparameters.  The approac
 - Keep probability (for dropout)
 - L2 regularization factor
 - Mini-batch size
+
+
+Phrase Model Manager
+--------------------
+This component is responsible for evaluating the relative perplexity of phrases returned by the Word Model Manager.  The intention of the Phrase Model Manager is to improve the overall robustness of the fingerspelling interpretation by providing feedback from the a higher level of abstraction.  A Recurrent Neural Network LSTM model trained on data from the Penn Treebank corpus is used to evaluate perplexity, a heuristic estimating how unlikely a given sequence of words is.  As an example, suppose the Word Model Manager returns the following two phrase candidates:
+- MY NAME IS ROB
+- MYNA ME IS ROB
+
+Although both phrases can be made with the same sequence of letters, the first phrase is a very common statement, while the second phrase uses a very uncommon word and isn't even grammatically correct.  The Phrase Model Manager aims to incorporate this information.
+
+Note that this feature is experimental, even by the standards of this project.
+
+### RNN LSTM Model
+Only minor changes are made to the Penn Treebank LSTM model example included with Google's TensorFlow.  This is not ideal for this application, but is convenient and workable for testing an experimental feature.
