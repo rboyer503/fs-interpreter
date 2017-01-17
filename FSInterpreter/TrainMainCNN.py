@@ -44,6 +44,7 @@ NUM_IMAGES = 142500
 NUM_LABELS = 25
 VALIDATION_SIZE = 1200
 TEST_SIZE = 3192
+TUNE_SIZE = 2110
 SEED = None  # 66478
 KERNEL_SIZE_C1 = 5
 KERNEL_SIZE_C2 = 5
@@ -66,6 +67,7 @@ def process_args():
     parser.add_argument('keep_prob', type=float, help='dropout keep probability')
     parser.add_argument('reg_factor', type=float, help='L2 regularization factor')
     parser.add_argument('b_size', type=int, help='batch size')
+    parser.add_argument('--tune', action='store_true', help='incorporate tuning data into training')
 
     args = parser.parse_args()
     print('Data index:', args.data_index)
@@ -76,6 +78,8 @@ def process_args():
     print('Keep prob:', args.keep_prob)
     print('Reg factor:', args.reg_factor)
     print('Batch size:', args.b_size)
+    if args.tune:
+        print('Tuning mode: On')
     return args
 
 
@@ -179,13 +183,28 @@ def main():
     test_data = extract_data(data_test_filename, TEST_SIZE)
     test_labels = extract_labels(labels_test_filename, TEST_SIZE)
 
+    # Extract tuning data and labels.
+    tune_data = tune_labels = None
+    if args.tune:
+        tune_data = extract_data('data.raw.gz', TUNE_SIZE)
+        tune_labels = extract_labels('labels.raw.gz', TUNE_SIZE)
+
     # Shuffle the data.
     perm = np.arange(NUM_IMAGES)
     np.random.shuffle(perm)
     train_data = train_data[perm]
     train_labels = train_labels[perm]
-    perm = np.arange(TEST_SIZE)
-    np.random.shuffle(perm)
+
+    # Load tuning data into training set.
+    if args.tune:
+        train_data[:TUNE_SIZE, :, :, :] = tune_data
+        train_labels[:TUNE_SIZE] = tune_labels
+        np.random.shuffle(perm)
+        train_data = train_data[perm]
+        train_labels = train_labels[perm]
+
+    # perm = np.arange(TEST_SIZE)
+    # np.random.shuffle(perm)
     curr_train_data = train_data[:, :, :, :]
     curr_train_labels = train_labels[:]
 
@@ -206,9 +225,12 @@ def main():
 
     phase_train = tf.placeholder(tf.bool, name='phase_train')
 
-    # For the validation and test data, we'll just hold the entire dataset in one constant node.
+    # For the validation, test, and tuning data, we'll just hold the entire dataset in one constant node.
     validation_data_node = tf.constant(validation_data)
     test_data_node = tf.constant(test_data)
+    tune_data_node = None
+    if args.tune:
+        tune_data_node = tf.constant(tune_data)
 
     # The variables below hold all the trainable weights. They are passed an initial value which will be assigned when
     # when we call: {tf.initialize_all_variables().run()}.
@@ -367,11 +389,14 @@ def main():
                                            0.9).minimize(loss,
                                                          global_step=batch)
 
-    # Predictions for the minibatch, validation set, and test set.
+    # Predictions for the minibatch, validation set, test set, and tuning set.
     train_prediction = tf.nn.softmax(logits)
     # We'll compute them only once in a while by calling their {eval()} method.
     validation_prediction = tf.nn.softmax(model(validation_data_node))
     test_prediction = tf.nn.softmax(model(test_data_node))
+    tune_prediction = None
+    if args.tune:
+        tune_prediction = tf.nn.softmax(model(tune_data_node))
 
     # New query nodes.
     query_data_node = tf.placeholder(tf.float32, shape=(1, IMAGE_SIZE, IMAGE_SIZE, NUM_CHANNELS), name='queryData')
@@ -437,6 +462,11 @@ def main():
                 print(time.ctime())
                 sys.stdout.flush()
                 saver.save(s, MODEL_DIRECTORY + 'train-vars', write_meta_graph=False)
+
+                # Report error on tuning data.
+                if args.tune:
+                    tune_error = error_rate(tune_prediction.eval(feed_dict={phase_train: False}), tune_labels)
+                    print('Tune error: %.1f%%' % tune_error)
 
         # Final test data set results.
         test_error = error_rate(test_prediction.eval(feed_dict={phase_train: False}), test_labels)

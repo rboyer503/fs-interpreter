@@ -41,13 +41,13 @@ NUM_LABELS = 25
 VALIDATION_SIZE = 1200
 TEST_SIZE = 3192
 KERNEL_SIZE = 5
-CONV_DEPTH = 10
-FC_DEPTH = 100
+CONV_DEPTH = 8  # 10 (train-vars-best-0.9)
+FC_DEPTH = 80  # 100 (0.9)
 LR_INIT = 0.015
 LR_DECAY = 0.95
 KEEP_PROB = 0.5
 REG_FACTOR = 0.0005
-BATCH_SIZE = 100
+BATCH_SIZE = 80  # 100 (0.9)
 
 # J/Z CNN-specific constants:
 # Update if CNN hyper-parameters or data sets are modified.
@@ -119,10 +119,13 @@ wmm = None
 pmm = None
 mainGraph = None
 mainSess = None
+gmGraph = None
+gmSess = None
 jzGraph = None
 jzSess = None
 devName = None
 stateMgr = None
+dataCollectMgr = None
 currMode = FSIMode.FSI_INIT
 fsiModeString = ["Initializing...",
                  "Waiting for webcam auto-adjust...",
@@ -454,6 +457,78 @@ class StateMgr:
             return 0.9
 
 
+class DataCollectMgr:
+    """
+    This class is responsible for management of live data collection.
+    This functionality is being added to close the loop between identifying classification failures and generating new
+    data samples to improve classification accuracy.
+    """
+    CAPTURE_SIZE = 10
+    DATA_FILENAME = 'data.raw'
+    LABELS_FILENAME = 'labels.raw'
+
+    def __init__(self):
+        """
+        Initialize instance.
+        """
+        self._letter = None
+        self._letter_index = 0
+        self._remaining = 0
+        self._data_file = None
+        self._labels_file = None
+
+    def trigger_capture(self, letter):
+        """
+        Initiate a capture of data samples.
+        Initialize state and prepare for file I/O.
+        :param letter: ASCII character representing the letter to capture
+        """
+        # Ignore request if capture is in progress.
+        if self._remaining != 0:
+            return
+
+        # Convert to upper-case.
+        if ord('a') <= letter <= ord('z'):
+            letter -= 32
+
+        # Input validation.
+        if letter < ord('A') or letter >= ord('Z') or letter == ord('J'):
+            # Currently only supporting main CNN data (not J/Z).
+            return
+
+        # Update state info.
+        self._letter = letter
+        self._remaining = DataCollectMgr.CAPTURE_SIZE
+        self._letter_index = letter - 65
+        if self._letter_index > 9:
+            self._letter_index -= 1
+
+        # Open raw files for binary append mode.
+        self._data_file = open(DataCollectMgr.DATA_FILENAME, 'ab')
+        self._labels_file = open(DataCollectMgr.LABELS_FILENAME, 'ab')
+
+    def process_image(self, image):
+        """
+        Perform capture of data sample.
+        On last capture, play a beep and close raw files.
+        :param image: image to capture
+        """
+        # Perform capture if request is in progress.
+        if self._remaining > 0:
+            self._remaining -= 1
+
+            # Write to raw files.
+            self._data_file.write(np.getbuffer(image))
+            self._labels_file.write(chr(self._letter_index))
+
+            if self._remaining == 0:
+                # Capture request complete.
+                os.system("aplay sounds/beep.wav > /dev/null 2>&1 &")
+
+                self._data_file.close()
+                self._labels_file.close()
+
+
 # ================================================================================
 # Functions
 # ================================================================================
@@ -572,7 +647,8 @@ def do_predict(img):
         else:
             ascii_val = 42  # *
         if curr_predictions[i] >= 0.1:
-            cv2.putText(img, chr(ascii_val), (20 + i * 22, 410), cv2.FONT_HERSHEY_SIMPLEX, curr_predictions[i] * 1.5,
+            cv2.putText(img, chr(ascii_val), (20 + i * 22, 410), cv2.FONT_HERSHEY_SIMPLEX,
+                        curr_predictions[i] * 1.5,
                         (255, 50, 50), 3)
 
     # Forward latest predictions on to the State Manager.
@@ -1299,6 +1375,7 @@ def process_image(img):
     global tuneModeRemaining
     global tuneNext
     global tuneLastBlowout
+    global dataCollectMgr
 
     if currMode == FSIMode.FSI_INIT:
         startTime = time.time()
@@ -1337,6 +1414,7 @@ def process_image(img):
         profile_entry("PROFILE: START PREDICT")
         do_predict(img)
         profile_entry("PROFILE: END TRACK")
+        dataCollectMgr.process_image(imgFeatureMain)
 
 
 def main():
@@ -1345,6 +1423,7 @@ def main():
     global pmm
     global devName
     global stateMgr
+    global dataCollectMgr
 
     # Attempt to retrieve/validate parameters.
     args = process_args()
@@ -1363,7 +1442,7 @@ def main():
     pmm = PhraseModelMgr()
 
     # At the time of this development effort, Tensorflow does not easily support loading a model from file and restoring
-    # saved parameters.  Instead, rebuilding both CNN graphs manually and restoring from saved checkpoints.
+    # saved parameters.  Instead, rebuilding CNN graphs manually and restoring from saved checkpoints.
     create_main_graph_and_restore()
     create_jz_graph_and_restore()
     profile_entry("PROFILE: GRAPHS RESTORED")
@@ -1384,6 +1463,9 @@ def main():
 
     # Initialize the State Manager.
     stateMgr = StateMgr()
+
+    # Initialize the Data Collection Manager.
+    dataCollectMgr = DataCollectMgr()
 
     # Executive loop - process images until ESC key is pressed.
     update_exposure = True
@@ -1418,6 +1500,8 @@ def main():
             wmm.dump_candidates()
         elif key == ord('2'):
             pmm.dump_phrases()
+        elif ord('a') <= key <= ord('z'):
+            dataCollectMgr.trigger_capture(key)
 
         # Process manual exposure updates.
         if update_exposure:

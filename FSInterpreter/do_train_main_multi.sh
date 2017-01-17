@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Base conv depth
-for i in 10
+for i in 8
 do
   # FCL depth
-  for j in 100
+  for j in 80
   do
     # LR init
     for k in 0.015
@@ -19,7 +19,7 @@ do
           for p in 0.0005
           do
             # Batch size
-            for q in 100
+            for q in 80 100
             do
               # Run several separate training sessions.
               for r in `seq 1 20`

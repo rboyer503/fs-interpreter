@@ -77,6 +77,22 @@ Once "Tracking hand..." is displayed, a diagnostic display will reflect the outp
 
 No phrase interpretation will begin until the first sentinel symbol.  To begin, hold the sentinel symbol (open hand facing forward with fingers spread).  Then fingerspell a short phrase, ending with the sentinel symbol.  The lower part of the diagnostic display will report the output of the Word Model Manager and Phrase Model Manager (prefixed by "WMM:" and "PMM:" respectively).  The Word Model Manager output is reported on-the-fly, finalizing the prediction once the sentinel symbol is received.  The final sentinel also triggers the Phrase Model Manager processing; a small number of the best phrases returned by the Word Model Manager are reevaluated based on their perplexity.
 
+### Commands
+The following commands are available via key press while the main display window is active.
+
+    ESC:    Exit
+    1:      Dump all phrase candidates from Word Model Manager
+    2:      Dump full phrase info from Phrase Model Manager
+    [a..z]: Capture a burst of data samples to data.raw/labels.raw
+    +/-:    Increase/decrease camera exposure
+
+### CNN Tuning Support
+In order to close the loop between identifying classification failures and generating new data samples to improve classification accuracy, functionality is available to capture samples on the fly.  While a symbol is being misclassified, hit the corresponding key to append a sample to local raw data files, data.raw and labels.raw.  These supplemental samples can then be used to tune the main CNN.
+
+Tuning the main CNN involves gzipping the data.raw and labels.raw files, then running one or more training sessions using the TrainMainCNN.py script with the --tune option.  This will overwrite random training samples from the standard data files with the supplemental tuning data.  Additionally, the test error against the tuning samples is periodically reported so that improvement can be monitored.  Once you're satisfied with the results, replace the ./model/main-cnn/train-vars-best-main checkpoint with the newly generated ./model/main-cnn/train-vars-best.
+
+Note that tuning of the J/Z CNN is not currently supported.
+
 
 Convolutional Neural Network Models
 -----------------------------------
