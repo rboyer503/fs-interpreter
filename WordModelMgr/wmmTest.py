@@ -1,15 +1,15 @@
 from wmmWrapper import *
 from time import sleep
-import numpy as np
 
 #           1111111111222222
 # 01234567890123456789012345
 # ABCDEFGHIJKLMNOPQRSTUVWXYZ
 
+
 def main():
     wmm = WordModelMgr()
     if not wmm.initialize():
-        print "Initialize failed."
+        print("Initialize failed.")
         return
 
     wmm.add_letter_prediction(2, 0.992046116107, 0.1)  # C
@@ -41,7 +41,7 @@ def main():
     wmm.finalize_prediction()
     wmm.dump_candidates()
 
-    print "BEST:", wmm.get_best_prediction()
+    print("BEST:", wmm.get_best_prediction().decode())
 
 
 if __name__ == '__main__':

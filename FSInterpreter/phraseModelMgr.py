@@ -7,8 +7,10 @@ import tensorflow as tf
 import numpy as np
 from operator import itemgetter
 
-from tensorflow.models.rnn import rnn_cell
-from tensorflow.models.rnn import seq2seq
+# from tensorflow.models.rnn import rnn_cell
+# from tensorflow.models.rnn import seq2seq
+from tensorflow.python.ops import rnn_cell
+from tensorflow.contrib import seq2seq
 import reader
 
 

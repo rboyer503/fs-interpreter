@@ -3,10 +3,6 @@ Fingerspelling Interpreter
 Perform hand tracking and fingerspelling interpretation.
 """
 
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-
 import tensorflow as tf
 import numpy as np
 import cv2
@@ -16,7 +12,8 @@ import os
 import argparse
 
 from wmmWrapper import *
-from phraseModelMgr import *
+
+# from phraseModelMgr import *
 
 
 # ================================================================================
@@ -88,11 +85,11 @@ class FSIMode:
     """
     Fingerspelling Interpreter Mode enumeration.
     """
-    FSI_INIT = 0    # Initial state
-    FSI_DELAY = 1   # Delay for delayDur seconds
-    FSI_FIND = 2    # Locate hand in image
-    FSI_TUNE = 3    # Hysteresis phase in which the main CNN is used to reject false positives and exposure is tuned
-    FSI_TRACK = 4   # Main phase in which hand is tracked and fingerspelling is interpreted
+    FSI_INIT = 0  # Initial state
+    FSI_DELAY = 1  # Delay for delayDur seconds
+    FSI_FIND = 2  # Locate hand in image
+    FSI_TUNE = 3  # Hysteresis phase in which the main CNN is used to reject false positives and exposure is tuned
+    FSI_TRACK = 4  # Main phase in which hand is tracked and fingerspelling is interpreted
 
     def __init__(self):
         pass
@@ -102,9 +99,9 @@ class HandAcceptance:
     """
     Hand Acceptance enumeration.
     """
-    HA_PROCESSING = 0   # Exposure tuning is on-going
-    HA_REJECT = 1       # Hand candidate has been rejected
-    HA_ACCEPT = 2       # Hand candidate has been accepted
+    HA_PROCESSING = 0  # Exposure tuning is on-going
+    HA_REJECT = 1  # Hand candidate has been rejected
+    HA_ACCEPT = 2  # Hand candidate has been accepted
 
     def __init__(self):
         pass
@@ -116,7 +113,7 @@ class HandAcceptance:
 pdf = np.empty((PREDICT_HIST_SIZE, 1))
 profileTime = time.time()
 wmm = None
-pmm = None
+# pmm = None
 mainGraph = None
 mainSess = None
 gmGraph = None
@@ -141,7 +138,7 @@ tuneComplete = False
 anchorSize = 0
 sizeAdjustArray = np.zeros(10, dtype=np.int)
 sizeAdjustIndex = 0
-absoluteExposure = 400
+absoluteExposure = 100
 cascade = cv2.CascadeClassifier('model/aHand.xml')
 minNeighbors = 3
 looseBound = None
@@ -255,8 +252,8 @@ class AdaptiveCanny:
         height, width = edges.shape[:2]
         x_center = width // 2
         y_center = height // 2
-        for x in xrange(width):
-            for y in xrange(height):
+        for x in range(width):
+            for y in range(height):
                 if edges.item(y, x) != 0:
                     edge_count += 1
                     total_dist += (x - x_center) ** 2
@@ -304,9 +301,9 @@ class StateMgr:
         """
         Processing state enumeration.
         """
-        PS_INIT = 0         # First sentinel not received
-        PS_PROCESSING = 1   # Normal processing state
-        PS_WAITING = 2      # Last phrase finalized, waiting for first new letter of next phrase
+        PS_INIT = 0  # First sentinel not received
+        PS_PROCESSING = 1  # Normal processing state
+        PS_WAITING = 2  # Last phrase finalized, waiting for first new letter of next phrase
 
         def __init__(self):
             pass
@@ -332,7 +329,7 @@ class StateMgr:
         :param predictions: smoothed, merged predictions from the CNNs
         """
         global wmm
-        global pmm
+        # global pmm
 
         # Update X-pos history.
         self.update_x_hist()
@@ -344,12 +341,12 @@ class StateMgr:
             self._sentinel_count += 1
             if self._sentinel_count >= StateMgr.SENTINEL_THRES:
                 sentinel_active = True
-                
+
                 # Sentinel detected, finalize and move to waiting state if processing.
                 if self._state == StateMgr.State.PS_PROCESSING:
                     self._state = StateMgr.State.PS_WAITING
                     wmm.finalize_prediction()
-                    print('WMM Final:', wmm.get_best_prediction())
+                    print('WMM Final:', wmm.get_best_prediction().decode())
 
                     # Send top phrases to PMM.
                     out_prob = ctypes.c_double()
@@ -357,16 +354,16 @@ class StateMgr:
                         curr_phrase = wmm.get_next_prediction(ctypes.byref(out_prob))
                         if not curr_phrase:
                             break
-                        pmm.add_phrase(curr_phrase, out_prob.value)
-                    print('PMM Final:', pmm.get_best_phrase()[0])
+                        # pmm.add_phrase(curr_phrase, out_prob.value)
+                    # print('PMM Final:', pmm.get_best_phrase()[0])
         else:
             self._sentinel_count = 0
-            
+
             # Sentinel not detected, reset Word/Phrase Model Managers and move to processing state if waiting.
             if self._state == StateMgr.State.PS_WAITING:
                 self._state = StateMgr.State.PS_PROCESSING
                 wmm.reset()
-                pmm.reset()
+                # pmm.reset()
 
         # Wait for debounced sentinel before processing triggers.
         if self._state == StateMgr.State.PS_INIT:
@@ -397,7 +394,7 @@ class StateMgr:
                         if i < 26:
                             ascii_val = i + 65  # Display capital letter
                             wmm.add_letter_prediction(i, self._max_conf[i], self.convert_to_double_prob(x_diff))
-                            print('Best:', wmm.get_best_prediction())
+                            print('Best:', wmm.get_best_prediction().decode())
                         else:
                             ascii_val = 42  # Display "*" for sentinel
 
@@ -566,7 +563,7 @@ def get_jz_predictions():
     :return: vector of probabilities of J/Z/neither (softmax)
     """
     global clipArray
-    
+
     # Pre-process image into feature vector of expected type/range.
     img_float = imgFeatureJZ.astype(np.float32)
     data = (img_float - (255.0 / 2.0)) / 255.0
@@ -596,7 +593,7 @@ def do_predict(img):
     global rollingPredictions
     global stateMgr
     global wmm
-    global pmm
+    # global pmm
 
     # Run CNNs on features to get predictions.
     main_predictions = get_main_predictions()
@@ -639,7 +636,7 @@ def do_predict(img):
     # Provide display for predictions.
     # For any predictions with >= 0.1 probability, we render the letter, scaling the text based on the probability.
     # (The greater the probability, the larger the letter is rendered.)
-    cv2.rectangle(img, (5, 375), (635, 415), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.rectangle(img, (5, 375), (635, 415), (0, 0, 0), cv2.FILLED)
     cv2.rectangle(img, (5, 375), (635, 415), (255, 255, 255))
     for i in range(0, len(curr_predictions)):
         if i < 26:
@@ -655,14 +652,16 @@ def do_predict(img):
     stateMgr.process_predictions(curr_predictions)
 
     # Provide display for latest Word Model Manager prediction.
-    cv2.rectangle(img, (5, 415), (635, 445), (0, 0, 0), cv2.cv.CV_FILLED)
+    cv2.rectangle(img, (5, 415), (635, 445), (0, 0, 0), cv2.FILLED)
     cv2.rectangle(img, (5, 415), (635, 445), (255, 255, 255))
-    cv2.putText(img, 'WMM: ' + wmm.get_best_prediction(), (20, 438), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 50, 50), 2)
+    cv2.putText(img, 'WMM: ' + wmm.get_best_prediction().decode(), (20, 438), cv2.FONT_HERSHEY_SIMPLEX, 0.7,
+                (255, 50, 50),
+                2)
 
     # Provide display for latest Phrase Model Manager prediction.
-    cv2.rectangle(img, (5, 445), (635, 475), (0, 0, 0), cv2.cv.CV_FILLED)
-    cv2.rectangle(img, (5, 445), (635, 475), (255, 255, 255))
-    cv2.putText(img, 'PMM: ' + pmm.get_best_phrase()[0], (20, 468), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 50, 50), 2)
+    # cv2.rectangle(img, (5, 445), (635, 475), (0, 0, 0), cv2.FILLED)
+    # cv2.rectangle(img, (5, 445), (635, 475), (255, 255, 255))
+    # cv2.putText(img, 'PMM: ' + pmm.get_best_phrase()[0], (20, 468), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 50, 50), 2)
 
 
 def do_tuning():
@@ -710,7 +709,7 @@ def do_tuning():
         return HandAcceptance.HA_ACCEPT
     else:
         return HandAcceptance.HA_PROCESSING
-    
+
 
 def get_focus_bound(init_bound):
     """
@@ -770,7 +769,7 @@ def track_hand(img):
     global sizeAdjustIndex
 
     # Limit processing to loose bounding box and reduce noise.
-    img_roi = img[looseBound[1]:looseBound[1]+looseBound[3], looseBound[0]:looseBound[0]+looseBound[2]]
+    img_roi = img[looseBound[1]:looseBound[1] + looseBound[3], looseBound[0]:looseBound[0] + looseBound[2]]
     img_roi = cv2.GaussianBlur(img_roi, (5, 5), 0)
     profile_entry("PROFILE: TRACKING - FILTERED")
 
@@ -787,7 +786,7 @@ def track_hand(img):
     profile_entry("PROFILE: TRACKING - CANNY")
     if not success:
         print('ERROR: Adaptive canny failed.')
-    dist_matrix = cv2.distanceTransform(255 - edges, cv2.cv.CV_DIST_L2, cv2.cv.CV_DIST_MASK_PRECISE)
+    dist_matrix = cv2.distanceTransform(255 - edges, cv2.DIST_L2, cv2.DIST_MASK_PRECISE)
     profile_entry("PROFILE: TRACKING - DIST TRANSFORM")
     dist_matrix = convert_distance_to_weight(dist_matrix)
     profile_entry("PROFILE: TRACKING - EDGE MATRIX")
@@ -797,7 +796,7 @@ def track_hand(img):
     # High values are indicative of over-exposure which can significantly degrade tracking and prediction.
     if currMode == FSIMode.FSI_TUNE:
         tb = get_tight_bound_in_lb(looseBound)
-        img_roi = img_gray[tb[1]:tb[1]+tb[3], tb[0]:tb[0]+tb[2]]
+        img_roi = img_gray[tb[1]:tb[1] + tb[3], tb[0]:tb[0] + tb[2]]
         tuneLastBlowout = (img_roi > 200).sum()
 
     # Calculate master quality matrix, incorporating:
@@ -811,8 +810,9 @@ def track_hand(img):
 
     # Determine adjusted position of bounding box based on "weighted center of color mass".
     # Find new x position first.
-    reduced_cols = cv2.reduce(master_matrix, 0, cv2.cv.CV_REDUCE_SUM)
+    reduced_cols = cv2.reduce(master_matrix, 0, cv2.REDUCE_SUM)
     master_sum = np.sum(reduced_cols)
+    # noinspection PyTypeChecker
     centroid_div = max(master_sum, 1.0)
     val = 0.0
     for i in range(reduced_cols.size):
@@ -823,7 +823,7 @@ def track_hand(img):
     # Find new y position.
     # Similar to finding x position, but also shift up slightly to give higher priority to top of hand (to avoid feature
     # image including excess wrist/arm).
-    reduced_rows = cv2.reduce(master_matrix, 1, cv2.cv.CV_REDUCE_SUM)
+    reduced_rows = cv2.reduce(master_matrix, 1, cv2.REDUCE_SUM)
     val = 0.0
     for i in range(reduced_rows.size):
         val += i * reduced_rows[i, 0]
@@ -843,7 +843,7 @@ def track_hand(img):
             if thres <= 0:
                 x_left = i
                 break
-                
+
         # Same process as above, but proceeding right to left.
         thres = int(master_sum * 0.1)
         x_right = 0
@@ -852,7 +852,7 @@ def track_hand(img):
             if thres <= 0:
                 x_right = i
                 break
-        
+
         # New loose bounding box width/height will be 3 times the range containing 80% of the feature data.
         # Constraining adjustment to within 10% of the original size to avoid catastrophic failure when background is
         # particularly unfavorable.
@@ -861,12 +861,12 @@ def track_hand(img):
             new_size = int(anchorSize * 0.9)
         elif new_size > int(anchorSize * 1.1):
             new_size = int(anchorSize * 1.1)
-        
+
         # Tracking 10 most recent size adjustment calculations.
         # The average from the last 10 frames of tuning will be used for the final loose bounding box size.
         sizeAdjustArray[sizeAdjustIndex] = new_size
         sizeAdjustIndex = (sizeAdjustIndex + 1) % 10
-        
+
         # Flag for recalculation of the focus weights if size changed.
         if new_size != looseBound[2]:
             recalc_weights = True
@@ -886,8 +886,8 @@ def track_hand(img):
     focus_bound = get_focus_bound(looseBound)
     # noinspection PyUnresolvedReferences
     master_matrix_gray = master_matrix.astype(np.uint8)
-    img_quality_base = master_matrix_gray[focus_bound[1]:focus_bound[1]+focus_bound[3],
-                                          focus_bound[0]:focus_bound[0]+focus_bound[2]]
+    img_quality_base = master_matrix_gray[focus_bound[1]:focus_bound[1] + focus_bound[3],
+                                          focus_bound[0]:focus_bound[0] + focus_bound[2]]
     imgFeatureMain = cv2.resize(img_quality_base, (IMAGE_SIZE, IMAGE_SIZE))
     imgFeatureJZ = cv2.resize(img_quality_base, (CLIP_IMAGE_SIZE, CLIP_IMAGE_SIZE))
     profile_entry("PROFILE: TRACKING - FEATURES")
@@ -925,7 +925,7 @@ def build_lut(img, smooth_factor):
 
     # Use tight bounding box to ensure ROI is entirely hand.
     tb = get_tight_bound()
-    img_roi = img_ycc[tb[1]:tb[1]+tb[3], tb[0]:tb[0]+tb[2]]
+    img_roi = img_ycc[tb[1]:tb[1] + tb[3], tb[0]:tb[0] + tb[2]]
 
     # Compute histograms for each channel, on both the full image and ROI.
     full_hists = [cv2.calcHist([img_ycc], [0], None, [256], [0, 256]),
@@ -1040,7 +1040,7 @@ def find_hand(img):
         minNeighbors += 1
     elif len(hands) == 1:
         # Basic hand candidate validation based on YCrCb ROI stats.
-        img_roi = img[hands[0][1]:hands[0][1]+hands[0][3], hands[0][0]:hands[0][0]+hands[0][2]]
+        img_roi = img[hands[0][1]:hands[0][1] + hands[0][3], hands[0][0]:hands[0][0] + hands[0][2]]
         if get_hand_outlier_factor(img_roi) < MAX_OUTLIER_FACTOR:
             # Hand candidate accepted.
             found = True
@@ -1116,30 +1116,30 @@ def create_main_graph_and_restore():
                                 seed=None), name='conv1_weights')
         conv1_biases = tf.Variable(tf.zeros([CONV_DEPTH]), name='conv1_biases')
         conv2_weights = tf.Variable(
-                tf.truncated_normal([KERNEL_SIZE, KERNEL_SIZE, CONV_DEPTH, (CONV_DEPTH * 2)],
-                                    stddev=math.sqrt(2.0 / (5 * 5 * CONV_DEPTH)),
-                                    seed=None), name='conv2_weights')
+            tf.truncated_normal([KERNEL_SIZE, KERNEL_SIZE, CONV_DEPTH, (CONV_DEPTH * 2)],
+                                stddev=math.sqrt(2.0 / (5 * 5 * CONV_DEPTH)),
+                                seed=None), name='conv2_weights')
         conv2_biases = tf.Variable(tf.zeros([(CONV_DEPTH * 2)]), name='conv2_biases')
         conv3_weights = tf.Variable(
-                tf.truncated_normal([KERNEL_SIZE, KERNEL_SIZE, (CONV_DEPTH * 2), (CONV_DEPTH * 4)],
-                                    stddev=math.sqrt(2.0 / (5 * 5 * CONV_DEPTH * 2)),
-                                    seed=None), name='conv3_weights')
+            tf.truncated_normal([KERNEL_SIZE, KERNEL_SIZE, (CONV_DEPTH * 2), (CONV_DEPTH * 4)],
+                                stddev=math.sqrt(2.0 / (5 * 5 * CONV_DEPTH * 2)),
+                                seed=None), name='conv3_weights')
         conv3_biases = tf.Variable(tf.zeros([(CONV_DEPTH * 4)]), name='conv3_biases')
         conv4_weights = tf.Variable(
-                tf.truncated_normal([KERNEL_SIZE, KERNEL_SIZE, (CONV_DEPTH * 4), (CONV_DEPTH * 8)],
-                                    stddev=math.sqrt(2.0 / (5 * 5 * CONV_DEPTH * 4)),
-                                    seed=None), name='conv4_weights')
+            tf.truncated_normal([KERNEL_SIZE, KERNEL_SIZE, (CONV_DEPTH * 4), (CONV_DEPTH * 8)],
+                                stddev=math.sqrt(2.0 / (5 * 5 * CONV_DEPTH * 4)),
+                                seed=None), name='conv4_weights')
         conv4_biases = tf.Variable(tf.zeros([(CONV_DEPTH * 8)]), name='conv4_biases')
         fcl_fanin = (IMAGE_SIZE // 16) * (IMAGE_SIZE // 16) * CONV_DEPTH * 8
         fc1_weights = tf.Variable(
-                tf.truncated_normal([fcl_fanin, FC_DEPTH],
-                                    stddev=math.sqrt(2.0 / fcl_fanin),
-                                    seed=None), name='fc1_weights')
+            tf.truncated_normal([fcl_fanin, FC_DEPTH],
+                                stddev=math.sqrt(2.0 / fcl_fanin),
+                                seed=None), name='fc1_weights')
         fc1_biases = tf.Variable(tf.zeros([FC_DEPTH]), name='fc1_biases')
         fc2_weights = tf.Variable(
-                tf.truncated_normal([FC_DEPTH, NUM_LABELS],
-                                    stddev=math.sqrt(2.0 / FC_DEPTH),
-                                    seed=None), name='fc2_weights')
+            tf.truncated_normal([FC_DEPTH, NUM_LABELS],
+                                stddev=math.sqrt(2.0 / FC_DEPTH),
+                                seed=None), name='fc2_weights')
         fc2_biases = tf.Variable(tf.zeros([NUM_LABELS]), name='fc2_biases')
 
         # We will replicate the model structure for the training subgraph, as well as the evaluation subgraphs, while
@@ -1179,7 +1179,7 @@ def create_main_graph_and_restore():
 
         # Training computation: logits + cross-entropy loss.
         logits = model(train_data_node, True)
-        loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits, train_labels_node))
+        loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=train_labels_node))
 
         # L2 regularization for the fully connected parameters.
         regularizers = (tf.nn.l2_loss(fc1_weights) + tf.nn.l2_loss(fc1_biases) +
@@ -1190,12 +1190,13 @@ def create_main_graph_and_restore():
         # Optimizer: set up a variable that's incremented once per batch and controls the learning rate decay.
         batch = tf.Variable(0)
         # Decay once per epoch, using an exponential schedule.
+        # noinspection PyTypeChecker
         learning_rate = tf.train.exponential_decay(
-                LR_INIT,  # Base learning rate.
-                batch * BATCH_SIZE,  # Current index into the dataset.
-                NUM_IMAGES,  # Decay step.
-                LR_DECAY,  # Decay rate.
-                staircase=True)
+            LR_INIT,  # Base learning rate.
+            batch * BATCH_SIZE,  # Current index into the dataset.
+            NUM_IMAGES,  # Decay step.
+            LR_DECAY,  # Decay rate.
+            staircase=True)
 
         # Use simple momentum for the optimization.
         tf.train.MomentumOptimizer(learning_rate, 0.9).minimize(loss,
@@ -1218,7 +1219,7 @@ def create_main_graph_and_restore():
         print('Restoring model variables from checkpoint...')
         saver = tf.train.Saver()
         mainSess = tf.Session()
-        mainSess.run(tf.initialize_all_variables())
+        mainSess.run(tf.global_variables_initializer())
         saver.restore(mainSess, 'model/main-cnn/train-vars-best-main')
 
 
@@ -1238,44 +1239,44 @@ def create_jz_graph_and_restore():
         train_labels_node = tf.placeholder(tf.float32, shape=(CLIP_BATCH_SIZE, CLIP_NUM_LABELS))
         validation_data_node = tf.zeros((CLIP_VALIDATION_SIZE, CLIP_IMAGE_SIZE, CLIP_IMAGE_SIZE, CLIP_NUM_CHANNELS))
         test_data_node = tf.zeros((CLIP_TEST_SIZE, CLIP_IMAGE_SIZE, CLIP_IMAGE_SIZE, CLIP_NUM_CHANNELS))
-        
+
         conv1_stddev = math.sqrt(1.0 / (CLIP_KERNEL_SIZE * CLIP_KERNEL_SIZE * CLIP_NUM_CHANNELS))
         conv1_weights = tf.Variable(
-                tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, CLIP_NUM_CHANNELS, CLIP_CONV_DEPTH],
-                                    stddev=conv1_stddev,
-                                    seed=SEED), name='conv1_weights')
+            tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, CLIP_NUM_CHANNELS, CLIP_CONV_DEPTH],
+                                stddev=conv1_stddev,
+                                seed=SEED), name='conv1_weights')
         conv1_biases = tf.Variable(tf.constant(conv1_stddev, shape=[CLIP_CONV_DEPTH]), name='conv1_biases')
         conv2_stddev = math.sqrt(2.0 / (CLIP_KERNEL_SIZE * CLIP_KERNEL_SIZE * CLIP_CONV_DEPTH))
         conv2_weights = tf.Variable(
-                tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, CLIP_CONV_DEPTH, (CLIP_CONV_DEPTH * 2)],
-                                    stddev=conv2_stddev,
-                                    seed=SEED), name='conv2_weights')
+            tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, CLIP_CONV_DEPTH, (CLIP_CONV_DEPTH * 2)],
+                                stddev=conv2_stddev,
+                                seed=SEED), name='conv2_weights')
         conv2_biases = tf.Variable(tf.constant(conv2_stddev, shape=[(CLIP_CONV_DEPTH * 2)]), name='conv2_biases')
         conv3_stddev = math.sqrt(2.0 / (CLIP_KERNEL_SIZE * CLIP_KERNEL_SIZE * CLIP_CONV_DEPTH * 2))
         conv3_weights = tf.Variable(
-                tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, (CLIP_CONV_DEPTH * 2), (CLIP_CONV_DEPTH * 4)],
-                                    stddev=conv3_stddev,
-                                    seed=SEED), name='conv3_weights')
+            tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, (CLIP_CONV_DEPTH * 2), (CLIP_CONV_DEPTH * 4)],
+                                stddev=conv3_stddev,
+                                seed=SEED), name='conv3_weights')
         conv3_biases = tf.Variable(tf.constant(conv3_stddev, shape=[(CLIP_CONV_DEPTH * 4)]), name='conv3_biases')
         conv4_stddev = math.sqrt(2.0 / (CLIP_KERNEL_SIZE * CLIP_KERNEL_SIZE * CLIP_CONV_DEPTH * 4))
         conv4_weights = tf.Variable(
-                tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, (CLIP_CONV_DEPTH * 4), (CLIP_CONV_DEPTH * 8)],
-                                    stddev=conv4_stddev,
-                                    seed=SEED), name='conv4_weights')
+            tf.truncated_normal([CLIP_KERNEL_SIZE, CLIP_KERNEL_SIZE, (CLIP_CONV_DEPTH * 4), (CLIP_CONV_DEPTH * 8)],
+                                stddev=conv4_stddev,
+                                seed=SEED), name='conv4_weights')
         conv4_biases = tf.Variable(tf.constant(conv4_stddev, shape=[(CLIP_CONV_DEPTH * 8)]), name='conv4_biases')
         fcl_fanin = (CLIP_IMAGE_SIZE // 16) * (CLIP_IMAGE_SIZE // 16) * CLIP_CONV_DEPTH * 8
         fc1_stddev = math.sqrt(2.0 / fcl_fanin)
         fc1_weights = tf.Variable(
-                tf.truncated_normal(
-                        [fcl_fanin, CLIP_FC_DEPTH],
-                        stddev=fc1_stddev,
-                        seed=SEED), name='fc1_weights')
+            tf.truncated_normal(
+                [fcl_fanin, CLIP_FC_DEPTH],
+                stddev=fc1_stddev,
+                seed=SEED), name='fc1_weights')
         fc1_biases = tf.Variable(tf.constant(fc1_stddev, shape=[CLIP_FC_DEPTH]), name='fc1_biases')
         fc2_stddev = math.sqrt(2.0 / CLIP_FC_DEPTH)
         fc2_weights = tf.Variable(
-                tf.truncated_normal([CLIP_FC_DEPTH, CLIP_NUM_LABELS],
-                                    stddev=fc2_stddev,
-                                    seed=SEED), name='fc2_weights')
+            tf.truncated_normal([CLIP_FC_DEPTH, CLIP_NUM_LABELS],
+                                stddev=fc2_stddev,
+                                seed=SEED), name='fc2_weights')
         fc2_biases = tf.Variable(tf.constant(fc2_stddev, shape=[CLIP_NUM_LABELS]), name='fc2_biases')
 
         # We will replicate the model structure for the training subgraph, as well as the evaluation subgraphs, while
@@ -1315,7 +1316,7 @@ def create_jz_graph_and_restore():
 
         # Training computation: logits + cross-entropy loss.
         logits = model(train_data_node, True)
-        loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits, train_labels_node))
+        loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=train_labels_node))
 
         # L2 regularization for the fully connected parameters.
         regularizers = (tf.nn.l2_loss(fc1_weights) + tf.nn.l2_loss(fc1_biases) +
@@ -1326,12 +1327,13 @@ def create_jz_graph_and_restore():
         # Optimizer: set up a variable that's incremented once per batch and controls the learning rate decay.
         batch = tf.Variable(0)
         # Decay once per epoch, using an exponential schedule.
+        # noinspection PyTypeChecker
         learning_rate = tf.train.exponential_decay(
-                CLIP_LR_INIT,  # Base learning rate.
-                batch * CLIP_BATCH_SIZE,  # Current index into the dataset.
-                CLIP_NUM_IMAGES,  # Decay step.
-                CLIP_LR_DECAY,  # Decay rate.
-                staircase=True)
+            CLIP_LR_INIT,  # Base learning rate.
+            batch * CLIP_BATCH_SIZE,  # Current index into the dataset.
+            CLIP_NUM_IMAGES,  # Decay step.
+            CLIP_LR_DECAY,  # Decay rate.
+            staircase=True)
 
         # Use simple momentum for the optimization.
         tf.train.MomentumOptimizer(learning_rate, 0.9).minimize(loss,
@@ -1354,7 +1356,7 @@ def create_jz_graph_and_restore():
         print('Restoring model variables from checkpoint...')
         saver = tf.train.Saver()
         jzSess = tf.Session()
-        jzSess.run(tf.initialize_all_variables())
+        jzSess.run(tf.global_variables_initializer())
         saver.restore(jzSess, 'model/jz-cnn/train-vars-best-jz')
 
 
@@ -1420,7 +1422,7 @@ def process_image(img):
 def main():
     global pdf
     global wmm
-    global pmm
+    # global pmm
     global devName
     global stateMgr
     global dataCollectMgr
@@ -1438,8 +1440,8 @@ def main():
         print('ERROR: WMM initialization failed.')
         return
 
-    print('Initializing Phrase Model Manager...')
-    pmm = PhraseModelMgr()
+    # print('Initializing Phrase Model Manager...')
+    # pmm = PhraseModelMgr()
 
     # At the time of this development effort, Tensorflow does not easily support loading a model from file and restoring
     # saved parameters.  Instead, rebuilding CNN graphs manually and restoring from saved checkpoints.
@@ -1477,7 +1479,7 @@ def main():
         # profile_entry("PROFILE: FRAME GRABBED")
         process_image(img)
         # profile_entry("PROFILE: PROCESSED")
-        cv2.rectangle(img, (5, 5), (310, 30), (0, 0, 0), cv2.cv.CV_FILLED)
+        cv2.rectangle(img, (5, 5), (310, 30), (0, 0, 0), cv2.FILLED)
         cv2.putText(img, fsiModeString[currMode], (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
         cv2.imshow('Main Display', img)
         # profile_entry("PROFILE: DISPLAYED")
@@ -1498,8 +1500,8 @@ def main():
                 absolute_exposure = 100
         elif key == ord('1'):
             wmm.dump_candidates()
-        elif key == ord('2'):
-            pmm.dump_phrases()
+        # elif key == ord('2'):
+        # pmm.dump_phrases()
         elif ord('a') <= key <= ord('z'):
             dataCollectMgr.trigger_capture(key)
 

@@ -1,5 +1,4 @@
-import ctypes 
-from numpy.ctypeslib import ndpointer
+import ctypes
 
 lib = ctypes.cdll.LoadLibrary('./lib/libwordmodelmgr.so')
 
